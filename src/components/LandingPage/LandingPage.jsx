@@ -107,23 +107,28 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-const LandingPageActions=[
-  {action:"home",
-  icon:<HomeIcon/>
-},
-{action:"explore",
-  icon:<ExploreIcon/>
-},
-{action:"bookmarks",
-  icon:<BookmarksIcon/>
-},
-{action:"notification",
-  icon:<NotificationsIcon/>
-},
-{action:"profile",
-  icon:<AccountCircleIcon/>
-}
-]
+  const LandingPageActions = [
+    {
+      action: "home",
+      icon: <HomeIcon />
+    },
+    {
+      action: "explore",
+      icon: <ExploreIcon />
+    },
+    {
+      action: "bookmarks",
+      icon: <BookmarksIcon />
+    },
+    {
+      action: "notification",
+      icon: <NotificationsIcon />
+    },
+    {
+      action: "profile",
+      icon: <AccountCircleIcon />
+    }
+  ]
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -204,7 +209,7 @@ const LandingPageActions=[
         <Divider />
         <List>
 
-          {[{action:'Create new Post',icon:<AddCircleIcon/>}].map((text, index) => (
+          {[{ action: 'Create new Post', icon: <AddCircleIcon /> }].map((text, index) => (
             <ListItem key={text.action} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -232,7 +237,7 @@ const LandingPageActions=[
         <DrawerHeader />
         <Textarea />
         <Typography paragraph>
-          <Post/>
+          <Post />
         </Typography>
 
 
@@ -244,15 +249,18 @@ const LandingPageActions=[
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            
           },
+          
         }}
+        className="suggested-people to-follow-section drawer-section"
         variant="permanent"
         anchor="right"
-        className="suggested-to-follow-section"
       >
         <Toolbar />
         <Divider />
-        <List>
+        <List
+          >
           {['someddddddddddddddddccccccccccccccccccccccdddddddd', 'user', 'to', 'follow'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
@@ -260,9 +268,9 @@ const LandingPageActions=[
                   <img src="https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png" alt="profile-pic" className="suggested-users-icons" />
                 </ListItemIcon>
                 <div>
-                  <ListItemText primary={text.substring(0,10)} />
-              
-                  {text.length>10?<>@{text.substring(0,10)}...</>:<>@{text}</>}
+                  <ListItemText primary={text.substring(0, 10)} />
+
+                  {text.length > 10 ? <>@{text.substring(0, 10)}...</> : <>@{text}</>}
                 </div>
                 <Button variant="contained" className="follow-button-landing-page">Follow</Button>
               </ListItemButton>
