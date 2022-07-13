@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Epilogue&family=Ubuntu&display=swap");
-.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation0.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight.css-18sg6k4-MuiPaper-root-MuiDrawer-paper {
+.suggested-to-follow-section{
   width: 25%;
 }
+
 .css-zxdg2z {
   margin: 0;
   margin-right: 24%;
@@ -35,7 +36,7 @@
 } */
 
 /* follow button landing page */
-.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButtonBase-root.css-sghohy-MuiButtonBase-root-MuiButton-root.follow-button-landing-page{
+.follow-button-landing-page{
   position: absolute;
   z-index: 9999999;
   margin-left: 11rem;

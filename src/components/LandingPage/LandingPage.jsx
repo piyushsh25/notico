@@ -248,6 +248,7 @@ const LandingPageActions=[
         }}
         variant="permanent"
         anchor="right"
+        className="suggested-to-follow-section"
       >
         <Toolbar />
         <Divider />
