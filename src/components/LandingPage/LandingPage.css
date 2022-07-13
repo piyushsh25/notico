@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue&family=Ubuntu&display=swap");
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation0.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiDrawer-paperAnchorDockedRight.css-18sg6k4-MuiPaper-root-MuiDrawer-paper {
+  width: 25%;
+}
+.css-zxdg2z {
+  margin: 0;
+  margin-right: 24%;
+}
+
+@media (max-width: 860px) {
+  .css-1qujdcc-MuiDrawer-docked {
+    display: none;
+  }
+  .css-zxdg2z {
+    margin: 0;
+  }
+}
+.notico-header {
+  font-family: "Epilogue", sans-serif;
+}
+.suggested-users-icons{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+/* user profile */
+/* .profile-badge{
+  display: flex;
+  margin: 0;
+  width: 150%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+} */
+
+/* follow button landing page */
+.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButtonBase-root.css-sghohy-MuiButtonBase-root-MuiButton-root.follow-button-landing-page{
+  position: absolute;
+  z-index: 9999999;
+  margin-left: 11rem;
+}
