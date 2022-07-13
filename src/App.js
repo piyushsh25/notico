@@ -1,9 +1,10 @@
 import "./App.css";
+import MiniDrawer from "./components/LandingPage/LandingPage";
 
 function App() {
   return (
     <div className="App">
-    hi 
+    <MiniDrawer/>
     </div>
   );
 }
