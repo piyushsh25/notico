@@ -44,7 +44,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
         <List>
             {LandingPageActions.map((text, index) => (
                 <ListItem key={text.action} disablePadding sx={{ display: 'block' }}>
-                <Link to={`${text.link}`}>
+                <Link to={`${text.link}`} className="cta-drawers-link">
                     <ListItemButton
                         sx={{
                             minHeight: 48,
