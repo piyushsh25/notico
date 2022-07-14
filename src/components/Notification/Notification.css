@@ -1,0 +1,20 @@
+.notico-post-liked-content{
+    display: flex;
+    margin-top: 4px;
+}
+.notico-post-liked div{
+    margin-left: 2rem;
+}
+.notico-liked-container{
+    border: 2px solid #000000;
+    padding: 8px;
+    margin: 8px;
+}
+.notico-liked-message{
+    margin-left: 4rem;
+    display: flex;
+}
+
+.notico-liked-message div{
+    margin-left: 2rem;
+}
