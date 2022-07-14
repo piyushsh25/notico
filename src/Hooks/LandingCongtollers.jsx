@@ -10,23 +10,28 @@ const drawerWidth = 240;
 export const LandingPageActions = [
     {
       action: "home",
-      icon: <HomeIcon />
+      icon: <HomeIcon />,
+      link:"/"
     },
     {
       action: "explore",
-      icon: <ExploreIcon />
+      icon: <ExploreIcon />,
+      link:"/"
     },
     {
       action: "bookmarks",
-      icon: <BookmarksIcon />
+      icon: <BookmarksIcon />,
+      link:"bookmarks"
     },
     {
       action: "notification",
-      icon: <NotificationsIcon />
+      icon: <NotificationsIcon />,
+      link:"notification"
     },
     {
       action: "profile",
-      icon: <AccountCircleIcon />
+      icon: <AccountCircleIcon />,
+      link:"me"
     }
   ]
 export const openedMixin = (theme) => ({

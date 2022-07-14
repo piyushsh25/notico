@@ -11,7 +11,7 @@ import { LandingCTA } from './LandingCTA';
 import { LandingSuggested } from './LandingSuggested';
 import { Header } from '../Header/Header';
 
-import {AppBar,Drawer,DrawerHeader,LandingPageActions} from "../../Hooks/LandingCongtollers"
+import { AppBar, Drawer, DrawerHeader, LandingPageActions } from "../../Hooks/LandingCongtollers"
 export default function HomePage() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -25,7 +25,7 @@ export default function HomePage() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen}/>
+      <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
       <LandingCTA theme={theme} Drawer={Drawer} DrawerHeader={DrawerHeader} handleDrawerClose={handleDrawerClose} open={open} LandingPageActions={LandingPageActions} />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="post-body-landing-page">
         <DrawerHeader />
@@ -37,6 +37,6 @@ export default function HomePage() {
         </Typography>
       </Box>
       <LandingSuggested Drawer={Drawer} />
-    </Box >
+    </Box>
   );
 }
