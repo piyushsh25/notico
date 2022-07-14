@@ -1,10 +1,14 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import MiniDrawer from "./components/LandingPage/LandingPage";
-
+import HomePage from "./components/LandingPage/LandingPage";
 function App() {
   return (
     <div className="App">
-    <MiniDrawer/>
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<HomePage/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
