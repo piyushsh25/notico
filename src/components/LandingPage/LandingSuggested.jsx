@@ -39,7 +39,6 @@ export const LandingSuggested = ({ Drawer }) => {
                         </ListItemIcon>
                         <div>
                             <ListItemText primary={text.substring(0, 10)} />
-
                             {text.length > 10 ? <>@{text.substring(0, 10)}...</> : <>@{text}</>}
                         </div>
                         <Button variant="contained" className="follow-button-landing-page">Follow</Button>
