@@ -10,7 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-
+import {Link} from "react-router-dom"
 export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions }) => {
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -44,6 +44,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
         <List>
             {LandingPageActions.map((text, index) => (
                 <ListItem key={text.action} disablePadding sx={{ display: 'block' }}>
+                <Link to={`${text.link}`}>
                     <ListItemButton
                         sx={{
                             minHeight: 48,
@@ -62,6 +63,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
                         </ListItemIcon>
                         <ListItemText primary={text.action} sx={{ opacity: open ? 1 : 0 }} />
                     </ListItemButton>
+                    </Link>
                 </ListItem>
             ))}
         </List>

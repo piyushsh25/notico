@@ -2,14 +2,10 @@
     font-size: 2rem;
     font-weight:bolder ;
 }
-.posts-container{
-    margin: 0 2%;
- 
-}
+
 .notico-post{
     display: flex;
     border: 2px solid rgb(188, 186, 186);
-    width: auto;
     height: auto;
     padding: 8px;
     margin-bottom: 12px;
