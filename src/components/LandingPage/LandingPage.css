@@ -39,5 +39,13 @@
 .follow-button-landing-page{
   position: absolute;
   z-index: 9999999;
-  margin-left: 11rem;
+  margin-left: 2rem !important;
+  /* important was used to override prebuilt classes . More than 5 inbuilt classes were used for styles */
+  padding: 0 !important;
+  padding: 8px 12px !important;
+  width: 0;
+  background-color: #ffffff !important;
+  color: #0000ff !important;
+  border: 2px solid rgb(54, 54, 223) !important;
+  border-radius: 8px !important;
 }
