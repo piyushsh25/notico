@@ -6,6 +6,5 @@ export const RedirectAuth=()=>{
         localStorage.getItem("notico-token")
     })
     const location= useLocation()
-    console.log(location)
     return localStorage.getItem("notico-token") ?<Navigate to="/"/>:<Outlet/>
 }

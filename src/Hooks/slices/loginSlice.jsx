@@ -32,7 +32,6 @@ const signUpState = createSlice({
             state.state = "fulfilled"
         },
         [loginButtonHandler.rejected]: (state, action) => {
-            console.log(action.error)
             state.state = "rejected"
         }
     }

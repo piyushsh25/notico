@@ -21,17 +21,17 @@ export const LandingPageActions = [
     {
       action: "bookmarks",
       icon: <BookmarksIcon />,
-      link:"bookmarks"
+      link:"/bookmarks"
     },
     {
       action: "notification",
       icon: <NotificationsIcon />,
-      link:"notification"
+      link:"/notification"
     },
     {
       action: "profile",
       icon: <AccountCircleIcon />,
-      link:"me"
+      link:"/me"
     }
   ]
 export const openedMixin = (theme) => ({

@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link } from "react-router-dom"
+import { Link,useLocation,useNavigate } from "react-router-dom"
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -34,7 +34,13 @@ export default function SignupForm() {
   const { firstName,
     lastName,
     username,
-    password } = useSelector((store) => store.signUpReducers)
+    password,state } = useSelector((store) => store.signUpReducers)
+    const location=useLocation()
+    const navigate=useNavigate()
+    const pathname=location.state.pathname
+    React.useEffect(()=>{
+      state==="fulfilled" && navigate(pathname)
+    },[dispatch,state])
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
