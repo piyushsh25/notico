@@ -13,11 +13,12 @@ export const PostBody = () => {
         }
     },[state,dispatch])
     return <>
+    
         {posts.map((post) => {
             return <div className="notico-container" key={post._id}>
                 <div className="notico-post">
                     <div className="notico-post-icon">
-                        <img src="https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png" alt="profile-pic" className="suggested-users-icons" />
+                        <img src={post.img} alt="profile-pic" className="suggested-users-icons" />
                     </div>
                     <div className="notico-post-content">
                         <div className="notico-post-user">
@@ -31,7 +32,7 @@ export const PostBody = () => {
                         <div className="notico-post-content">
                             {post.content}
                         </div>
-                        <PostsCTA/>
+                        <PostsCTA post={post}/>
                     </div>
                 </div>
             </div>

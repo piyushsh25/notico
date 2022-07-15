@@ -21,6 +21,7 @@ export const posts = [
     updatedAt: formatDate(),
     firstName: "user4",
     lastName: "user4",
+    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png",
     comments: [
       {
         _id: uuid(),
@@ -51,9 +52,10 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
-    firstName: "user4",
-    lastName: "user4",
+    firstName: "user2",
+    lastName: "user2",
     username: "user2",
+    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png",
     comments: [
       {
         _id: uuid(),
@@ -86,9 +88,10 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
-    username: "user3",
+    username: "user4",
     firstName: "user4",
     lastName: "user4",
+    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png",
     comments: [
       {
         _id: uuid(),
