@@ -8,10 +8,22 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
 import { NoticoFooter } from '../Footer/Footer';
-
+import { GetUsers } from '../../Hooks/getUsers';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers } from '../../Hooks/slices/usersSlice';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export const LandingSuggested = ({ Drawer }) => {
     const drawerWidth = 240;
+    const dispatch = useDispatch()
+    const { users, state } = useSelector((store) => store.reducer)
+    React.useEffect(() => {
+        if (state === "idle") {
+            dispatch(getUsers())
+        }
+    }, [dispatch, state])
+    console.log(state)
     return <Drawer
         sx={{
             width: drawerWidth,
@@ -29,17 +41,25 @@ export const LandingSuggested = ({ Drawer }) => {
     >
         <Toolbar />
         <Divider />
+
+
         <List
         >
-            {['someddddddddddddddddccccccccccccccccccccccdddddddd', 'user', 'to', 'follow'].map((text, index) => (
-                <ListItem key={text} disablePadding>
+            {state === "loading" && <Box sx={{ display: 'flex' }}>
+                <CircularProgress />
+            </Box>}
+            {state === "failed" && <div>
+                failed to load suggestions. refresh the page
+            </div>}
+            {users.map((user, index) => (
+                <ListItem key={index} disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
-                            <img src="https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png" alt="profile-pic" className="suggested-users-icons" />
+                            <img src={user.img} alt="profile-pic" className="suggested-users-icons" />
                         </ListItemIcon>
                         <div>
-                            <ListItemText primary={text.substring(0, 10)} />
-                            {text.length > 10 ? <>@{text.substring(0, 10)}...</> : <>@{text}</>}
+                            <ListItemText primary={(user.firstName).substring(0, 10)} />
+                            {user.firstName.length > 10 ? <>@{user.firstName.substring(0, 10)}...</> : <>@{user.username}</>}
                         </div>
                         <Button variant="contained" className="follow-button-landing-page">Follow</Button>
                     </ListItemButton>

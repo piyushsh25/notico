@@ -3,7 +3,8 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import "./TextArea.css"
 import { TextCTA } from './TextCTA';
 import { Divider } from '@mui/material';
-export default function TextArea() {
+export default function TextArea({showAction,setShowAction,showActionHandler}) {
+  
     return <div className='text-area-container'>
         <TextareaAutosize
             aria-label="minimum height"
@@ -11,8 +12,11 @@ export default function TextArea() {
             className="text-area"
             placeholder="what's happening?"
             style={{ width: "60vw" }}
+            onInput={()=>showActionHandler(true)}
         />
-        <Divider />
-        <TextCTA />
+        {showAction && <><Divider />
+            <TextCTA />
+        </>
+        }
     </div>
 }
