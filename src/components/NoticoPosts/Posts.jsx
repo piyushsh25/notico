@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 
 export const Post = () => {
     const { state } = useSelector((store) => store.postReducer)
-    console.log(state)
     return <div className="posts-container post-body-landing-page">
         <div className="home-page-posts-header">
             latest  Noticos
