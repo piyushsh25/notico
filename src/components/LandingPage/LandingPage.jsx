@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-
 import Typography from '@mui/material/Typography';
 import "./LandingPage.css"
 import Textarea from '../CreateNotico/TextArea';
@@ -11,7 +10,7 @@ import { LandingCTA } from './LandingCTA';
 import { LandingSuggested } from './LandingSuggested';
 import { Header } from '../Header/Header';
 
-import { AppBar, Drawer, DrawerHeader, LandingPageActions } from "../../Hooks/LandingCongtollers"
+import { AppBar, Drawer, DrawerHeader, LandingPageActions } from "../../Hooks/LandingControllers"
 export default function HomePage() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
