@@ -12,7 +12,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginActions, loginButtonHandler } from '../../Hooks/slices/loginSlice';
-
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -33,10 +34,17 @@ export default function LoginForm() {
     const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
+    const [errorLogin, setErrorLogin] = React.useState()
     const pathname = location?.state?.from?.pathname || "/"
     React.useEffect(() => {
         state === "fulfilled" && navigate(pathname)
-    },[state,dispatch])
+        state === "idle" && setErrorLogin(false)
+        state === "rejected" && setErrorLogin(true)
+        state === "rejected" && setTimeout(() => {
+            setErrorLogin(false)
+        }, 5000)
+
+    }, [state, dispatch])
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
@@ -55,6 +63,10 @@ export default function LoginForm() {
                     <Typography component="h1" variant="h5">
                         Log in
                     </Typography>
+                    {errorLogin && <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        Try again — <strong>Password and email do not match</strong>
+                    </Alert>}
                     <Box component="form" noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
@@ -86,7 +98,7 @@ export default function LoginForm() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link to="/signup" variant="body2" state={{pathname}}>
+                                <Link to="/signup" variant="body2" state={{ pathname }}>
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

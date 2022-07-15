@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link,useLocation,useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -12,6 +12,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from "react-redux"
 import { signUpActions, signupButtonHandler } from '../../Hooks/slices/signupSlice';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 // signupButtonHandler
 
 function Copyright(props) {
@@ -30,17 +32,25 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignupForm() {
+  const [errorSignup, setErrorSignup] = React.useState(false)
   const dispatch = useDispatch()
   const { firstName,
     lastName,
     username,
-    password,state } = useSelector((store) => store.signUpReducers)
-    const location=useLocation()
-    const navigate=useNavigate()
-    const pathname=location.state.pathname
-    React.useEffect(()=>{
-      state==="fulfilled" && navigate(pathname)
-    },[dispatch,state])
+    password, state } = useSelector((store) => store.signUpReducers)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const pathname = location?.state?.pathname || "/"
+  React.useEffect(() => {
+    state === "fulfilled" && navigate(pathname)
+    state === "idle" && setErrorSignup(false)
+    state === "rejected" && setErrorSignup(true)
+    state === "rejected" && setTimeout(() => {
+      setErrorSignup(false)
+    }, 5000)
+
+  }, [dispatch, state])
+  
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -59,6 +69,10 @@ export default function SignupForm() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {errorSignup && <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            Try again — <strong>The input couldn't be processed.</strong>
+          </Alert>}
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -117,7 +131,7 @@ export default function SignupForm() {
               sx={{ mt: 3, mb: 2 }}
               onClick={() => dispatch(signupButtonHandler(({ firstName, lastName, username, password })))}
             >
-              Sign Up
+              Login
             </Button>
             <Grid container justifyContent="flex-end">
               <Link to="/login" variant="body2">
@@ -127,6 +141,7 @@ export default function SignupForm() {
             </Grid>
           </Box>
         </Box>
+
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
