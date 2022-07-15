@@ -11,6 +11,7 @@ export const loginButtonHandler = createAsyncThunk("auth/loginButtonHandler", as
         username: username, password: password
     })
     localStorage.setItem("notico-token",response.data.encodedToken)
+    localStorage.setItem("notico-details",response.data)
 })
 const signUpState = createSlice({
     name: "login",
@@ -25,7 +26,6 @@ const signUpState = createSlice({
     },
     extraReducers: {
         [loginButtonHandler.pending]: (state, action) => {
-            console.log("loadinffffffffffffff")
             state.state = "loading"
         },
         [loginButtonHandler.fulfilled]: (state, action) => {
