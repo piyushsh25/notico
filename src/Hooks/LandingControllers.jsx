@@ -14,9 +14,9 @@ export const LandingPageActions = [
       link:"/"
     },
     {
-      action: "explore",
+      action: "login",
       icon: <ExploreIcon />,
-      link:"/"
+      link:"/login"
     },
     {
       action: "bookmarks",
