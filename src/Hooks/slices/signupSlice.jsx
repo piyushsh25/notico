@@ -4,10 +4,11 @@ const initialState = {
     firstName: "",
     lastName: "",
     username: "",
-    password: ""
+    password: "",
+    state:"idle",
+    error:""
 }
 export const signupButtonHandler = createAsyncThunk("auth/signupButtonHandler", async ({ firstName, lastName, username, password }) => {
-    console.log(firstName, lastName, username, password)
     const response = await axios.post("/api/auth/signup", {
         firstName,
         lastName,
@@ -19,7 +20,8 @@ export const signupButtonHandler = createAsyncThunk("auth/signupButtonHandler", 
         userBio: [],
         img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
     })
-    console.log(response)
+    localStorage.setItem("notico-token",response.data.encodedToken)
+    localStorage.setItem("notico-details",response.data)
 })
 const signupSlice = createSlice({
     name: "signup",
@@ -39,7 +41,17 @@ const signupSlice = createSlice({
         }
     },
     extraReducers: {
-
+        [signupButtonHandler.pending]:(state,action)=>{
+            state.state="loading"
+            
+        },
+        [signupButtonHandler.fulfilled]:(state,action)=>{
+            state.state="fulfilled"
+        },
+        [signupButtonHandler.rejected]:(state,action)=>{
+            state.state="rejected"
+        },
+        
     }
 })
 export const signUpReducers = signupSlice.reducer
