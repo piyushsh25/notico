@@ -1,9 +1,20 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getPosts } from "../../Hooks/slices/postSlice"
 import { PostsCTA } from "./PostsCTA"
 
 export const PostBody = () => {
+    const {state,posts}=useSelector((store)=>store.postReducer)
+
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        if(state==="idle"){
+            dispatch(getPosts())
+        }
+    },[state,dispatch])
     return <>
-        {[1, 2, 3, 4, 5].map((num) => {
-            return <div className="notico-container" key={num}>
+        {posts.map((post) => {
+            return <div className="notico-container" key={post._id}>
                 <div className="notico-post">
                     <div className="notico-post-icon">
                         <img src="https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png" alt="profile-pic" className="suggested-users-icons" />
@@ -11,14 +22,14 @@ export const PostBody = () => {
                     <div className="notico-post-content">
                         <div className="notico-post-user">
                             <div className="notico-post-user-name">
-                                namee
+                                {post.firstName+" "+post.lastName}
                             </div>
                             <div className="notico-post-user-username">
-                                @username
+                                @{post.username}
                             </div>
                         </div>
                         <div className="notico-post-content">
-                            Noticos icon namee username notico post contentNoticos icon. Noticos icon namee username notico post contentNoticos icon. Noticos icon namee username notico post contentNoticos icon.Noticos icon namee username notico post contentNoticos icon Noticos icon namee username notico post contentNoticos icon
+                            {post.content}
                         </div>
                         <PostsCTA/>
                     </div>

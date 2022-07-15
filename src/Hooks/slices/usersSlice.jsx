@@ -10,7 +10,6 @@ export const getUsers = createAsyncThunk("users/getUsers", async () => {
     const  response  = await axios.get("/api/users")
     return response.data.users
 })
-console.log(getUsers)
 const userSlice = createSlice({
     name: "getUsers",
     initialState,

@@ -8,7 +8,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
 import { NoticoFooter } from '../Footer/Footer';
-import { GetUsers } from '../../Hooks/getUsers';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../../Hooks/slices/usersSlice';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,13 +16,12 @@ import Box from '@mui/material/Box';
 export const LandingSuggested = ({ Drawer }) => {
     const drawerWidth = 240;
     const dispatch = useDispatch()
-    const { users, state } = useSelector((store) => store.reducer)
+    const { users, state } = useSelector((store) => store.userReducer)
     React.useEffect(() => {
         if (state === "idle") {
             dispatch(getUsers())
         }
     }, [dispatch, state])
-    console.log(state)
     return <Drawer
         sx={{
             width: drawerWidth,
