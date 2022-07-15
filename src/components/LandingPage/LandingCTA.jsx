@@ -11,7 +11,9 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {Link} from "react-router-dom"
+import {useSelector} from "react-redux"
 export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions }) => {
+  
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>

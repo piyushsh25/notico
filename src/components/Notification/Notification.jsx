@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import React from "react";
 import { LandingCTA } from "../LandingPage/LandingCTA"
 import { LandingSuggested } from "../LandingPage/LandingSuggested"
-import { Drawer, DrawerHeader, LandingPageActions, AppBar } from "../../Hooks/LandingCongtollers";
+import { Drawer, DrawerHeader, LandingPageActions, AppBar } from "../../Hooks/LandingControllers";
 import { Header } from '../Header/Header';
 import { NotificationPosts } from "./NotificationPosts";
 import { Box, Typography } from "@mui/material";
