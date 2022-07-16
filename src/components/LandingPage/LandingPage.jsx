@@ -27,7 +27,7 @@ export default function HomePage() {
         setShowAction(value)
     }
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} onClick={()=>showActionHandler(false)}>
       <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
       <LandingCTA theme={theme} Drawer={Drawer} DrawerHeader={DrawerHeader} handleDrawerClose={handleDrawerClose} open={open} LandingPageActions={LandingPageActions} />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="post-body-landing-page">
