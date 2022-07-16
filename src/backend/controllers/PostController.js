@@ -77,7 +77,7 @@ export const createPostHandler = function (schema, request) {
         }
       );
     }
-    const { postData } = JSON.parse(request.requestBody);
+    const  postData  = JSON.parse(request.requestBody);
     const post = {
       _id: uuid(),
       ...postData,
@@ -86,6 +86,10 @@ export const createPostHandler = function (schema, request) {
         likedBy: [],
         dislikedBy: [],
       },
+      comments: [],
+      firstName: user.firstName,
+      lastName: user.lastName,
+      img: user.img,
       username: user.username,
       createdAt: formatDate(),
       updatedAt: formatDate(),
@@ -180,7 +184,7 @@ export const likePostHandler = function (schema, request) {
       (currUser) => currUser._id !== user._id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push({...user, bookmarks: []});
+    post.likes.likedBy.push({ ...user, bookmarks: [] });
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
@@ -233,7 +237,7 @@ export const dislikePostHandler = function (schema, request) {
     const updatedLikedBy = post.likes.likedBy.filter(
       (currUser) => currUser._id !== user._id
     );
-    post.likes.dislikedBy.push({...user, bookmarks: []});
+    post.likes.dislikedBy.push({ ...user, bookmarks: [] });
     post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });

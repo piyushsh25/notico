@@ -27,13 +27,13 @@ export default function HomePage() {
         setShowAction(value)
     }
   return (
-    <Box sx={{ display: 'flex' }} onClick={()=>showActionHandler(false)}>
+    <Box sx={{ display: 'flex' }}>
       <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
       <LandingCTA theme={theme} Drawer={Drawer} DrawerHeader={DrawerHeader} handleDrawerClose={handleDrawerClose} open={open} LandingPageActions={LandingPageActions} />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="post-body-landing-page">
         <DrawerHeader />
         {/* create new posts */}
-        <Textarea showAction={showAction} setShowAction={setShowAction} showActionHandler={showActionHandler}/>
+        <Textarea showAction={showAction} setShowAction={setShowAction} showActionHandler={showActionHandler} onClick={()=>showActionHandler(true)}/>
         {/* the posts {noticos} */}
         <Typography paragraph>
           <Post />
