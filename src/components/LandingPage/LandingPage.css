@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Epilogue&family=Ubuntu&display=swap");
-.suggested-people.to-follow-section.drawer-section div{
+.suggested-people.to-follow-section.drawer-section div {
   width: 30%;
 }
 
@@ -7,28 +7,28 @@
   margin: 0;
   margin-right: 24%;
 }
-.notico-post{
+.notico-post {
   width: 132%;
 }
 @media (max-width: 860px) {
-  .suggested-people.to-follow-section.drawer-section div{
+  .suggested-people.to-follow-section.drawer-section div {
     display: none;
   }
- .posts-container{
+  .posts-container {
     margin: 0 2%;
-}
-.post-body-landing-page {
-  margin: 0;
-  margin-right: 2%;
-}
-.notico-post{
-  width: 102%;
-}
+  }
+  .post-body-landing-page {
+    margin: 0;
+    margin-right: 2%;
+  }
+  .notico-post {
+    width: 102%;
+  }
 }
 .notico-header {
   font-family: "Epilogue", sans-serif;
 }
-.suggested-users-icons{
+.suggested-users-icons {
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
@@ -45,7 +45,7 @@
 } */
 
 /* follow button landing page */
-.follow-button-landing-page{
+.follow-button-landing-page {
   position: absolute;
   z-index: 9999999;
   margin-left: 2rem !important;
@@ -57,7 +57,7 @@
   border: 2px solid rgb(54, 54, 223) !important;
   border-radius: 8px !important;
 }
-.cta-drawers-link{
+.cta-drawers-link {
   color: #000000;
   text-decoration: none;
 }

@@ -7,13 +7,14 @@ const initialState = {
     error: null
 }
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
-    const  response  = await axios.get("/api/users")
+    const response = await axios.get("/api/users")
     return response.data.users
 })
 const userSlice = createSlice({
     name: "getUsers",
     initialState,
-    reducers: {},
+    reducers: {}
+    ,
     extraReducers: {
         [getUsers.pending]: (state, action) => {
             state.state = "loading"
@@ -31,3 +32,4 @@ const userSlice = createSlice({
     }
 })
 export const userReducer = userSlice.reducer
+export const userAction = userSlice.actions

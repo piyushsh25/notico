@@ -100,7 +100,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
             ))}
 
             {token && <ListItem key={"logout"} disablePadding sx={{ display: 'block' }}>
-                <Link to="/logout">
+                <Link to="/logout" className="cta-drawers-link">
                     <ListItemButton
                         sx={{
                             minHeight: 48,
@@ -122,7 +122,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
                 </Link>
             </ListItem>}
             {!token && <ListItem key={"login"} disablePadding sx={{ display: 'block' }}>
-                <Link to={`/login`}>
+                <Link to={`/login`} className="cta-drawers-link">
                     <ListItemButton
                         sx={{
                             minHeight: 48,
