@@ -11,7 +11,7 @@
   width: 132%;
 }
 @media (max-width: 860px) {
-  .css-1qujdcc-MuiDrawer-docked {
+  .suggested-people.to-follow-section.drawer-section div{
     display: none;
   }
  .posts-container{
