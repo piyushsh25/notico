@@ -48,6 +48,16 @@ export const disLikePostHandler = createAsyncThunk("dislike/disLikePostHandler",
     return dislikePostResponse.data.posts
 
 })
+export const deletePostHandler = createAsyncThunk("delete/deletePostHandler", async (post) => {
+    const encodedToken = localStorage.getItem("notico-token")
+    const postId = post._id
+    const deletedPostResponse = await axios.delete(`/api/posts/${postId}`,
+        {
+            headers: { authorization: encodedToken }
+        })
+    return deletedPostResponse.data.posts
+
+})
 const postSlice = createSlice({
     name: "posts",
     initialState,
@@ -105,6 +115,18 @@ const postSlice = createSlice({
         },
         [disLikePostHandler.rejected]: (state, action) => {
             state.likeState = "error"
+        },
+        [deletePostHandler.pending]: (state, action) => {
+            // to reload and render updated post, state is set to idle
+            state.state = "idle"
+            state.state = "loading"
+        },
+        [deletePostHandler.fulfilled]: (state, action) => {
+            state.state = "successful"
+            state.posts = action.payload
+        },
+        [deletePostHandler.rejected]: (state, action) => {
+            state.state = "error"
         },
     }
 })
