@@ -10,10 +10,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import {Link} from "react-router-dom"
-import {useSelector} from "react-redux"
+import ExploreIcon from '@mui/icons-material/Explore';
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions }) => {
-  
+    React.useEffect(() => {
+        localStorage?.getItem("notico-token")
+    })
+    const token = localStorage?.getItem("notico-token")
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
@@ -46,25 +50,25 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
         <List>
             {LandingPageActions.map((text, index) => (
                 <ListItem key={text.action} disablePadding sx={{ display: 'block' }}>
-                <Link to={`${text.link}`} className="cta-drawers-link">
-                    <ListItemButton
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}
-                    >
-                        <ListItemIcon
+                    <Link to={`${text.link}`} className="cta-drawers-link" onClick={text.onClick}>
+                        <ListItemButton
                             sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
                             }}
                         >
-                            {text.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={text.action} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                {text.icon}
+                            </ListItemIcon>
+                            <ListItemText primary={text.action} sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
                     </Link>
                 </ListItem>
             ))}
@@ -94,6 +98,52 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
                     </ListItemButton>
                 </ListItem>
             ))}
+
+            {token && <ListItem key={"logout"} disablePadding sx={{ display: 'block' }}>
+                <Link to="/logout">
+                    <ListItemButton
+                        sx={{
+                            minHeight: 48,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.5,
+                        }}
+                    >
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            {<ExploreIcon />}
+                        </ListItemIcon>
+                        <ListItemText primary={"logout"} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                </Link>
+            </ListItem>}
+            {!token && <ListItem key={"login"} disablePadding sx={{ display: 'block' }}>
+                <Link to={`/login`}>
+                    <ListItemButton
+                        sx={{
+                            minHeight: 48,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.5,
+                        }}
+                    >
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            {<ExploreIcon />}
+                        </ListItemIcon>
+                        <ListItemText primary={"login"} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                </Link>
+            </ListItem>}
+
         </List>
     </Drawer>
 }

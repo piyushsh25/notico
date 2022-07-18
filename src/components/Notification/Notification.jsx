@@ -7,27 +7,27 @@ import { Header } from '../Header/Header';
 import { NotificationPosts } from "./NotificationPosts";
 import { Box, Typography } from "@mui/material";
 export const Notification = () => {
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-    return <>
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  return <>
 
-       <Box sx={{ display: 'flex' }}>
-      <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen}/>
+    <Box sx={{ display: 'flex' }}>
+      <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
       <LandingCTA theme={theme} Drawer={Drawer} DrawerHeader={DrawerHeader} handleDrawerClose={handleDrawerClose} open={open} LandingPageActions={LandingPageActions} />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="post-body-landing-page">
         <DrawerHeader />
         {/* the posts {noticos} */}
         <Typography paragraph>
-        <NotificationPosts/>
+          <NotificationPosts />
         </Typography>
       </Box>
       <LandingSuggested Drawer={Drawer} />
     </Box >
-    </>
+  </>
 }

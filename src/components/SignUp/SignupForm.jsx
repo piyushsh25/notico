@@ -48,9 +48,12 @@ export default function SignupForm() {
     state === "rejected" && setTimeout(() => {
       setErrorSignup(false)
     }, 5000)
+    setTimeout(() => {
+      dispatch(signUpActions.setStateIdleHandler())
+    }, 500)
 
   }, [dispatch, state])
-  
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -141,7 +144,6 @@ export default function SignupForm() {
             </Grid>
           </Box>
         </Box>
-
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
