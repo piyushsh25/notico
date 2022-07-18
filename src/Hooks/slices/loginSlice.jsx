@@ -5,7 +5,7 @@ const initialState = {
     password: "",
     state: "idle",
     error: "",
-    
+    userDetails:""
 }
 export const loginButtonHandler = createAsyncThunk("auth/loginButtonHandler", async ({ username, password }) => {
     const response = await axios.post("/api/auth/login", {
@@ -13,8 +13,10 @@ export const loginButtonHandler = createAsyncThunk("auth/loginButtonHandler", as
     })
     localStorage.setItem("notico-token",response.data.encodedToken)
     localStorage.setItem("notico-details",JSON.stringify(response.data))
+    return response.data
 })
-const signUpState = createSlice({
+
+const loginSlice = createSlice({
     name: "login",
     initialState,
     reducers: {
@@ -38,8 +40,10 @@ const signUpState = createSlice({
         },
         [loginButtonHandler.rejected]: (state, action) => {
             state.state = "rejected"
-        }
+        },
+       
+
     }
 })
-export const loginReducer = signUpState.reducer
-export const loginActions = signUpState.actions
+export const loginReducer = loginSlice.reducer
+export const loginActions = loginSlice.actions

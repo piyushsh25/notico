@@ -17,7 +17,6 @@ export const users = [
     followers: [],
     bookmarks: [],
     userBio: [],
-    likedPosts: [],
     updatedAt: formatDate(),
     img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
@@ -32,7 +31,6 @@ export const users = [
     followers: [],
     bookmarks: [],
     userBio: [],
-    likedPosts: [],
     updatedAt: formatDate(),
     img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
@@ -47,7 +45,6 @@ export const users = [
     followers: [],
     bookmarks: [],
     userBio: [],
-    likedPosts: [],
     updatedAt: formatDate(),
     img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
@@ -61,7 +58,6 @@ export const users = [
     following: [],
     followers: [],
     bookmarks: [],
-    likedPosts: [],
     userBio: [],
     updatedAt: formatDate(),
     img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
@@ -77,7 +73,6 @@ export const users = [
     followers: [],
     bookmarks: [],
     userBio: [],
-    likedPosts: [],
     updatedAt: formatDate(),
     img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
@@ -92,7 +87,6 @@ export const users = [
     followers: [],
     bookmarks: [],
     userBio: [],
-    likedPosts: [],
     updatedAt: formatDate(),
     img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },

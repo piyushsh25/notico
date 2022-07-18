@@ -28,8 +28,8 @@ export const LandingSuggested = ({ Drawer }) => {
     }, [])
     React.useEffect(() => {
         dispatch(getUsers())
-    }, [state.user])
-   
+    }, [state.users, dispatch])
+
     // dispatch(getUsers())
     return <Drawer
         sx={{
@@ -58,6 +58,7 @@ export const LandingSuggested = ({ Drawer }) => {
             {state === "failed" && <div>
                 failed to load suggestions. refresh the page
             </div>}
+
             {users.map((user, index) => (
                 <ListItem key={index} disablePadding>
                     <ListItemButton>

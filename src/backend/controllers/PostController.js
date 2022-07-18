@@ -186,10 +186,6 @@ export const likePostHandler = function (schema, request) {
     );
     post.likes.likeCount += 1;
     post.likes.likedBy.push({ ...user, bookmarks: [] });
-    // extracting liked posts from the user
-    // spread operator for adding the current post in the users' likedPosts array
-    const likedPosts = [...user.likedPosts, post]
-    this.db.users.update({ _id: user._id }, { ...user, likedPosts, updatedAt: formatDate() })
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() },);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {

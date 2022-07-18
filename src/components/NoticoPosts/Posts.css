@@ -40,3 +40,8 @@
     margin-left: 1rem;
 }
 
+.circular-progress-loading.landing-page-posts{
+    position: absolute;
+    z-index: 9999999;
+    margin: 15% 25%;
+}

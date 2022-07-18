@@ -45,8 +45,8 @@ export const disLikePostHandler = createAsyncThunk("dislike/disLikePostHandler",
             }
         }
     )
-
     return dislikePostResponse.data.posts
+
 })
 const postSlice = createSlice({
     name: "posts",
