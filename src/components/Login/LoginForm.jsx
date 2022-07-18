@@ -38,13 +38,16 @@ export default function LoginForm() {
     const pathname = location?.state?.from?.pathname || "/"
     React.useEffect(() => {
         state === "fulfilled" && navigate(pathname)
-        state === "idle" && setErrorLogin(false)
         state === "rejected" && setErrorLogin(true)
         state === "rejected" && setTimeout(() => {
             setErrorLogin(false)
         }, 5000)
-
+        setTimeout(()=>{
+            dispatch(loginActions.setStateIdleHandler())
+        },500)
+       
     }, [state, dispatch])
+    console.log(state)
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">

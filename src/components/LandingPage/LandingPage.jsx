@@ -18,6 +18,7 @@ export default function HomePage() {
     setOpen(true);
   };
 
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -26,6 +27,7 @@ export default function HomePage() {
     function showActionHandler(value) {
         setShowAction(value)
     }
+  
   return (
     <Box sx={{ display: 'flex' }} onClick={()=>showActionHandler(false)}>
       <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
@@ -33,7 +35,7 @@ export default function HomePage() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="post-body-landing-page">
         <DrawerHeader />
         {/* create new posts */}
-        <Textarea showAction={showAction} setShowAction={setShowAction} showActionHandler={showActionHandler}/>
+        <Textarea showAction={showAction} setShowAction={setShowAction} showActionHandler={showActionHandler} onClick={()=>showActionHandler(true)}/>
         {/* the posts {noticos} */}
         <Typography paragraph>
           <Post />

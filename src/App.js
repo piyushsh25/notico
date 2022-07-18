@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Logout } from "./components/Logout/Logout";
 import { RedirectAuth } from "./Hooks/Auth/RedirectAuth";
 import { RequiresAuth } from "./Hooks/Auth/RequiresAuth";
 import { LandingPage } from "./Pages/LandingPage";
@@ -15,8 +16,10 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route element={<RequiresAuth />}>
             <Route path="/notification" element={<NotificationPage />} />
+            <Route path="/logout" element={<Logout />} />
+
           </Route>
-          <Route element={<RedirectAuth/>}>
+          <Route element={<RedirectAuth />}>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Route>
