@@ -13,12 +13,13 @@ export const users = [
     username: "piyush1",
     password: "piyush",
     createdAt: formatDate(),
-    following:[],
-    followers:[],
-    bookmarks:[],
-    userBio:[],
+    following: [],
+    followers: [],
+    bookmarks: [],
+    userBio: [],
+    likedPosts: [],
     updatedAt: formatDate(),
-    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
+    img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
   {
     _id: uuid(),
@@ -27,12 +28,13 @@ export const users = [
     username: "test@gmail.com",
     password: "test123",
     createdAt: formatDate(),
-    following:[],
-    followers:[],
-    bookmarks:[],
-    userBio:[],
+    following: [],
+    followers: [],
+    bookmarks: [],
+    userBio: [],
+    likedPosts: [],
     updatedAt: formatDate(),
-    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
+    img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
   {
     _id: uuid(),
@@ -41,12 +43,13 @@ export const users = [
     username: "user1",
     password: "user1",
     createdAt: formatDate(),
-    following:[],
-    followers:[],
-    bookmarks:[],
-    userBio:[],
+    following: [],
+    followers: [],
+    bookmarks: [],
+    userBio: [],
+    likedPosts: [],
     updatedAt: formatDate(),
-    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
+    img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
   {
     _id: uuid(),
@@ -55,12 +58,13 @@ export const users = [
     username: "user2",
     password: "user2",
     createdAt: formatDate(),
-    following:[],
-    followers:[],
-    bookmarks:[],
-    userBio:[],
+    following: [],
+    followers: [],
+    bookmarks: [],
+    likedPosts: [],
+    userBio: [],
     updatedAt: formatDate(),
-    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
+    img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
   {
     _id: uuid(),
@@ -69,12 +73,13 @@ export const users = [
     username: "user3",
     password: "user3",
     createdAt: formatDate(),
-    following:[],
-    followers:[],
-    bookmarks:[],
-    userBio:[],
+    following: [],
+    followers: [],
+    bookmarks: [],
+    userBio: [],
+    likedPosts: [],
     updatedAt: formatDate(),
-    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
+    img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
   {
     _id: uuid(),
@@ -83,11 +88,12 @@ export const users = [
     username: "user4",
     password: "user4",
     createdAt: formatDate(),
-    following:[],
-    followers:[],
-    bookmarks:[],
-    userBio:[],
+    following: [],
+    followers: [],
+    bookmarks: [],
+    userBio: [],
+    likedPosts: [],
     updatedAt: formatDate(),
-    img:"https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
+    img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
   },
 ];

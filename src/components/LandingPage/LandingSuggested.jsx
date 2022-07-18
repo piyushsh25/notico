@@ -12,20 +12,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, userAction } from '../../Hooks/slices/usersSlice';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { requiresAuth } from '../../backend/utils/authUtils';
 
 export const LandingSuggested = ({ Drawer }) => {
     const drawerWidth = 240;
-
     const dispatch = useDispatch()
     const { users, state } = useSelector((store) => store.userReducer)
     React.useEffect(() => {
         if (state === "idle") {
             dispatch(getUsers())
         }
+        setTimeout(() => {
+            dispatch(userAction.setGetUserIdle())
+        }, 1000)
     }, [])
     React.useEffect(() => {
         dispatch(getUsers())
     }, [state.user])
+   
+    // dispatch(getUsers())
     return <Drawer
         sx={{
             width: drawerWidth,

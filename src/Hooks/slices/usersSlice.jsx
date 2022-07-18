@@ -13,8 +13,11 @@ export const getUsers = createAsyncThunk("users/getUsers", async () => {
 const userSlice = createSlice({
     name: "getUsers",
     initialState,
-    reducers: {}
-    ,
+    reducers: {
+        setGetUserIdle:(state,action)=>{
+            state.state="idle"
+        }
+    },
     extraReducers: {
         [getUsers.pending]: (state, action) => {
             state.state = "loading"

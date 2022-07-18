@@ -77,7 +77,7 @@ export const createPostHandler = function (schema, request) {
         }
       );
     }
-    const  postData  = JSON.parse(request.requestBody);
+    const postData = JSON.parse(request.requestBody);
     const post = {
       _id: uuid(),
       ...postData,
@@ -159,6 +159,7 @@ export const editPostHandler = function (schema, request) {
 
 export const likePostHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
+
   try {
     if (!user) {
       return new Response(
@@ -185,7 +186,11 @@ export const likePostHandler = function (schema, request) {
     );
     post.likes.likeCount += 1;
     post.likes.likedBy.push({ ...user, bookmarks: [] });
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+    // extracting liked posts from the user
+    // spread operator for adding the current post in the users' likedPosts array
+    const likedPosts = [...user.likedPosts, post]
+    this.db.users.update({ _id: user._id }, { ...user, likedPosts, updatedAt: formatDate() })
+    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() },);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
