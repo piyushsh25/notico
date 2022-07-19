@@ -18,8 +18,9 @@ export const BookmarkArray = () => {
         {postBookmarkState === "error" &&
             <div>Error loading noticos. Refresh the page</div>
         }
+        {bookmarks.length===0 && <div>No noticos' bookmarked..</div>}
         {
-            bookmarks.map((bookmark) => {
+            bookmarks?.map((bookmark) => {
                 return <div className="notico-container" key={bookmark._id}>
                     <div className="notico-post">
                         <div className="notico-post-icon">
