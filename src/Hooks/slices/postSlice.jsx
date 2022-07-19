@@ -13,8 +13,11 @@ const initialState = {
     singlePostDetails: null,
     postCommentState: "idle",
     commentData: "",
-    postBookmarkState:"idle",
-    bookmarks:[]
+    postBookmarkState: "idle",
+    deleteBookmarkState: "idle",
+    getBookmarkState: "idle",
+    bookmarks: [],
+    showCommentPage: false
 }
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
     const { data } = await axios.get("/api/posts")
@@ -110,6 +113,17 @@ export const deleteBookmarksHandler = createAsyncThunk("post/deleteBookmarksHand
     )
     return postRemoveBookMark.data.bookmarks
 })
+export const getBookmarksHandler = createAsyncThunk("post/getBookmarksHandler", async () => {
+    const encodedToken = localStorage.getItem("notico-token")
+    const getBookmarkResponse = await axios.get(`/api/users/bookmark`,
+        {
+            headers: {
+                authorization: encodedToken
+            }
+        }
+    )
+    return getBookmarkResponse.data.bookmarks
+})
 
 const postSlice = createSlice({
     name: "posts",
@@ -123,6 +137,9 @@ const postSlice = createSlice({
         },
         setCommentHandler: (state, action) => {
             state.commentData = action.payload
+        },
+        setCommentPageHandler: (state, action) => {
+            state.showCommentPage = action.payload
         }
     },
     extraReducers: {
@@ -205,24 +222,34 @@ const postSlice = createSlice({
             state.postCommentState = "rejected"
         },
         [postBookmarksHandler.pending]: (state, action) => {
-            state.postBookmarksHandler = "loading"
+            state.postBookmarkState = "loading"
         },
         [postBookmarksHandler.fulfilled]: (state, action) => {
-            state.postBookmarksHandler = "fulfilled"
+            state.postBookmarkState = "fulfilled"
             state.bookmarks = action.payload
         },
         [postBookmarksHandler.rejected]: (state, action) => {
-            state.postBookmarksHandler = "rejected"
+            state.postBookmarkState = "rejected"
         },
         [deleteBookmarksHandler.pending]: (state, action) => {
-            state.postBookmarksHandler = "loading"
+            state.deleteBookmarkState = "loading"
         },
         [deleteBookmarksHandler.fulfilled]: (state, action) => {
-            state.postBookmarksHandler = "fulfilled"
+            state.deleteBookmarkState = "fulfilled"
             state.bookmarks = action.payload
         },
         [deleteBookmarksHandler.rejected]: (state, action) => {
-            state.postBookmarksHandler = "rejected"
+            state.deleteBookmarkState = "rejected"
+        },
+        [getBookmarksHandler.pending]: (state, action) => {
+            state.getBookmarkState = "loading"
+        },
+        [getBookmarksHandler.fulfilled]: (state, action) => {
+            state.getBookmarkState = "fulfilled"
+            state.bookmarks = action.payload
+        },
+        [getBookmarksHandler.rejected]: (state, action) => {
+            state.getBookmarkState = "rejected"
         },
     }
 })

@@ -1,14 +1,11 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getPosts, postAction } from "../../Hooks/slices/postSlice"
+import { getPosts } from "../../Hooks/slices/postSlice"
 import { PostsCTA } from "./PostsCTA"
 import CommentPage from "../Comment/CommentPage";
-import { useState } from "react";
-import { Hidden } from "@mui/material";
 
 export const PostBody = () => {
-    const { state, posts } = useSelector((store) => store.postReducer)
-    const [showCommentPage, setShowCommentPage] = useState(false)
+    const { state, posts, showCommentPage } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     useEffect(() => {
         if (state === "idle") {
@@ -36,10 +33,10 @@ export const PostBody = () => {
                         <div className="notico-post-content">
                             {post.content}
                         </div>
-                        <PostsCTA post={post} showCommentPage={showCommentPage} setShowCommentPage={setShowCommentPage} />
+                        <PostsCTA post={post} showCommentPage={showCommentPage} />
                     </div>
                 </div>
-                {showCommentPage && <CommentPage post={post} setShowCommentPage={setShowCommentPage} />}
+                {showCommentPage && <CommentPage post={post} />}
             </div>
 
         })}

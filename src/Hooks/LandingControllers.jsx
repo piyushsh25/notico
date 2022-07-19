@@ -21,7 +21,7 @@ export const LandingPageActions = [
     {
       action: "bookmarks",
       icon: <BookmarksIcon />,
-      link:"/bookmarks"
+      link:"/bookmark"
     },
     {
       action: "notification",

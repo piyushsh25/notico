@@ -4,24 +4,26 @@ import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react"
-import { deleteBookmarksHandler, deletePostHandler, disLikePostHandler, getIndividualPost, likePostHandler, postBookmarksHandler } from '../../Hooks/slices/postSlice';
+import { deleteBookmarksHandler, deletePostHandler, disLikePostHandler, getBookmarksHandler, getIndividualPost, likePostHandler, postAction, postBookmarksHandler } from '../../Hooks/slices/postSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-export const PostsCTA = ({ post, showCommentPage, setShowCommentPage }) => {
+export const PostsCTA = ({ post, showCommentPage }) => {
     const { bookmarks } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     useEffect(() => {
         (localStorage?.getItem("notico-details"))
     })
+    useEffect(()=>{
+        dispatch(getBookmarksHandler())
+    },[])
     const localStorageUserName = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     const isLiked = post.likes.likedBy.some(user => user.username === localStorageUserName)
     const userNotico = post.username === localStorageUserName
     function showCommentsHandler(post) {
-        setShowCommentPage(() => true)
+        dispatch(postAction.setCommentPageHandler(true))
         dispatch(getIndividualPost(post))
     }
-    console.log(bookmarks)
     let isInBookmarks;
     return <div className="notico-post-cta-buttons">
         <div>

@@ -3,6 +3,7 @@ import "./App.css";
 import { Logout } from "./components/Logout/Logout";
 import { RedirectAuth } from "./Hooks/Auth/RedirectAuth";
 import { RequiresAuth } from "./Hooks/Auth/RequiresAuth";
+import { Bookmark } from "./Pages/Bookmark";
 import { LandingPage } from "./Pages/LandingPage";
 import { Login } from "./Pages/Login";
 import { NotificationPage } from "./Pages/NotificationPage";
@@ -17,7 +18,7 @@ function App() {
           <Route element={<RequiresAuth />}>
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/logout" element={<Logout />} />
-
+            <Route path="/bookmark" element={<Bookmark />} />
           </Route>
           <Route element={<RedirectAuth />}>
             <Route path="/login" element={<Login />} />
