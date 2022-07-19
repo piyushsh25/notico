@@ -18,8 +18,9 @@ export const signupHandler = function (schema, request) {
   const { username, password, ...rest } = JSON.parse(request.requestBody);
   try {
     // check if username already exists
-    const foundUser = schema.users.findBy({ username: username });
-    if (foundUser) {
+    // made changes to the var ,was causing problem retrieving on signup/login while extracting data from localstorage
+    const foundExistingUser = schema.users.findBy({ username: username });
+    if (foundExistingUser) {
       return new Response(
         422,
         {},
@@ -41,12 +42,14 @@ export const signupHandler = function (schema, request) {
       following: [],
       bookmarks: [],
     };
-    const createdUser = schema.users.create(newUser);
+    // made changes to the var ,was causing problem retrieving on signup/login while extracting data from localstorage
+    const foundUser = schema.users.create(newUser);
     const encodedToken = sign(
       { _id, username },
       process.env.REACT_APP_JWT_SECRET
     );
-    return new Response(201, {}, { createdUser, encodedToken });
+
+    return new Response(201, {}, { foundUser, encodedToken });
   } catch (error) {
     return new Response(
       500,

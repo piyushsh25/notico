@@ -14,11 +14,12 @@ export const PostsCTA = ({ post, showCommentPage }) => {
     useEffect(() => {
         (localStorage?.getItem("notico-details"))
     })
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getBookmarksHandler())
-    },[])
+    }, [])
     const localStorageUserName = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     const isLiked = post.likes.likedBy.some(user => user.username === localStorageUserName)
+    console.log(localStorageUserName)
     const userNotico = post.username === localStorageUserName
     function showCommentsHandler(post) {
         dispatch(postAction.setCommentPageHandler(true))
@@ -49,12 +50,12 @@ export const PostsCTA = ({ post, showCommentPage }) => {
         <div>
             <div>
                 {isInBookmarks = bookmarks?.some((noticos) => {
-                   
+
                     return noticos._id === post._id
                 })}
 
                 {!isInBookmarks ? <BookmarkBorderIcon onClick={() => dispatch(postBookmarksHandler(post))} /> :
-                    <BookmarkIcon onClick={()=>dispatch(deleteBookmarksHandler(post))}/>}
+                    <BookmarkIcon onClick={() => dispatch(deleteBookmarksHandler(post))} />}
             </div>
         </div>
         {userNotico &&
