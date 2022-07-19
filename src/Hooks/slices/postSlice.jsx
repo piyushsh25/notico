@@ -8,7 +8,9 @@ const initialState = {
     createPost: "",
     createPostStatus: "idle",
     likeState: "idle",
-    dislikeState: "idle"
+    dislikeState: "idle",
+    singlePostState: "idle",
+    singlePostDetails: null,
 }
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
     const { data } = await axios.get("/api/posts")
@@ -58,6 +60,13 @@ export const deletePostHandler = createAsyncThunk("delete/deletePostHandler", as
     return deletedPostResponse.data.posts
 
 })
+export const getIndividualPost = createAsyncThunk("post/getIndividualPost", async (post) => {
+    const postId = post._id
+    const getIndividualPost = await axios.get(`/api/posts/${postId}`)
+    return getIndividualPost.data.post
+
+})
+
 const postSlice = createSlice({
     name: "posts",
     initialState,
@@ -127,6 +136,16 @@ const postSlice = createSlice({
         },
         [deletePostHandler.rejected]: (state, action) => {
             state.state = "error"
+        },
+        [getIndividualPost.pending]: (state, action) => {
+            state.singlePostState = "loading"
+        },
+        [getIndividualPost.fulfilled]: (state, action) => {
+            state.singlePostState = "fulfilled"
+            state.singlePostDetails = action.payload
+        },
+        [getIndividualPost.rejected]: (state, action) => {
+            state.singlePostDetails = "rejected"
         },
     }
 })

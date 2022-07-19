@@ -18,6 +18,5 @@ export const Post = () => {
         }
 
         <PostBody />
-
     </div>
 }

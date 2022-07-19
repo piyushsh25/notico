@@ -1,49 +1,49 @@
-.home-page-posts-header{
-    font-size: 2rem;
-    font-weight:bolder ;
+.home-page-posts-header {
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
-.notico-post{
-    display: flex;
-    border: 2px solid rgb(188, 186, 186);
-    height: auto;
-    padding: 8px;
-    margin-bottom: 12px;
+.notico-post {
+  display: flex;
+  border: 2px solid rgb(188, 186, 186);
+  height: auto;
+  padding: 8px;
+  margin-bottom: 12px;
 }
-.notico-post-content{
-    margin-left: 1rem;
+.notico-post-content {
+  margin-left: 1rem;
 }
-.notico-post-user{
-    display: flex;
-    margin-bottom: 4px;
+.notico-post-user {
+  display: flex;
+  margin-bottom: 4px;
 }
-.notico-post-user-name{
-    display: flex;
-    margin-left: 1rem;
-    margin-bottom: 4px;
-    font-weight: bolder;
+.notico-post-user-name {
+  display: flex;
+  margin-left: 1rem;
+  margin-bottom: 4px;
+  font-weight: bolder;
 }
-.notico-post-user-username{
-    margin-left: 8px;
+.notico-post-user-username {
+  margin-left: 8px;
 }
-.notico-post-cta-buttons{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-    width: 49vw;
-}
-
-.notico-post-cta-buttons div{
-    display: flex;
-}
-.notico-post-cta-buttons div div{
-    margin-left: 1rem;
-    cursor: pointer;
+.notico-post-cta-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  width: 49vw;
 }
 
-.circular-progress-loading.landing-page-posts{
-    position: absolute;
-    z-index: 9999999;
-    margin: 15% 25%;
+.notico-post-cta-buttons div {
+  display: flex;
+}
+.notico-post-cta-buttons div div {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.circular-progress-loading.landing-page-posts {
+  position: absolute;
+  z-index: 9999999;
+  margin: 15% 25%;
 }
 
