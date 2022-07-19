@@ -8,26 +8,33 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import "./CommentPage.css"
+import { getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
 export default function CommentPage({ post, setShowCommentPage }) {
-    const { singlePostState, singlePostDetails } = useSelector((store) => store.postReducer)
-
+    const { singlePostState, singlePostDetails, commentData } = useSelector((store) => store.postReducer)
+    const dispatch = useDispatch()
+    async function commentHandler(post, commentData) {
+        console.log(singlePostDetails)
+        await dispatch(postCommentHandler({ singlePostDetails, commentData }))
+        await dispatch(getIndividualPost(singlePostDetails))
+        await dispatch(getPosts())
+    }
     return (<div className='comment-page'>
 
         <List className="comment-container">
             {singlePostState === "loading" && <CircularProgress className="circular-progress-loading" />}
             {singlePostState === "error" && <div>Couldn't load comments please try later.</div>}
             <div className='comment-model-cta'>
-                <TextField id="standard-basic" label="Comment" variant="standard" className="comment-modal-input" />
-                <ArrowCircleRightIcon className="comment-modal-button"/>
+                <TextField id="standard-basic" label="Comment" variant="standard" className="comment-modal-input" onChange={(e) => dispatch(postAction.setCommentHandler(e.target.value))} />
+                <ArrowCircleRightIcon className="comment-modal-button" onClick={() => commentHandler(post, commentData)} />
                 <CloseIcon className="comment-page-crossbar" onClick={() => setShowCommentPage(false)} />
             </div>
 
             {singlePostDetails?.comments.map((comment) => {
-                return <ListItem alignItems="flex-start">
+                return <ListItem alignItems="flex-start" key={comment._id}>
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src={singlePostDetails?.img} />
                     </ListItemAvatar>

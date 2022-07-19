@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getPosts } from "../../Hooks/slices/postSlice"
+import { getPosts, postAction } from "../../Hooks/slices/postSlice"
 import { PostsCTA } from "./PostsCTA"
 import CommentPage from "../Comment/CommentPage";
 import { useState } from "react";
@@ -15,7 +15,6 @@ export const PostBody = () => {
             dispatch(getPosts())
         }
         showCommentPage ? (document.body.style.overflow = "hidden") : (document.body.style.overflow = "scroll")
-
     }, [state, dispatch, showCommentPage])
 
     return <>

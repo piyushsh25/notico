@@ -11,6 +11,8 @@ const initialState = {
     dislikeState: "idle",
     singlePostState: "idle",
     singlePostDetails: null,
+    postCommentState: "idle",
+    commentData: ""
 }
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
     const { data } = await axios.get("/api/posts")
@@ -66,6 +68,20 @@ export const getIndividualPost = createAsyncThunk("post/getIndividualPost", asyn
     return getIndividualPost.data.post
 
 })
+export const postCommentHandler = createAsyncThunk("post/postCommentHandler", async ({ singlePostDetails, commentData: text }) => {
+    const encodedToken = localStorage.getItem("notico-token")
+    const postId = singlePostDetails._id
+    const postComment = await axios.post(`/api/comments/add/${postId}`,
+        { text },
+        {
+            headers: {
+                authorization: encodedToken
+            }
+        }
+    )
+    return postComment.data.comments
+
+})
 
 const postSlice = createSlice({
     name: "posts",
@@ -76,6 +92,9 @@ const postSlice = createSlice({
         },
         setGetPostIdle: (state, action) => {
             state.state = "idle"
+        },
+        setCommentHandler: (state, action) => {
+            state.commentData = action.payload
         }
     },
     extraReducers: {
@@ -146,6 +165,17 @@ const postSlice = createSlice({
         },
         [getIndividualPost.rejected]: (state, action) => {
             state.singlePostDetails = "rejected"
+        },
+        [postCommentHandler.pending]: (state, action) => {
+            state.postCommentState = "loading"
+        },
+        [postCommentHandler.fulfilled]: (state, action) => {
+            state.postCommentState = "fulfilled"
+            console.log("success")
+        },
+        [postCommentHandler.rejected]: (state, action) => {
+            state.postCommentState = "rejected"
+            console.log("error")
         },
     }
 })

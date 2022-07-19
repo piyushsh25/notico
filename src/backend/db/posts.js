@@ -10,7 +10,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "elon is funny af :))",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -26,7 +26,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "user1",
-        text: "t vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut pe",
+        text: "true elons hehe",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -36,7 +36,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "user2",
-        text: "Wow!",
+        text: "Wow yes!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -49,7 +49,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "this is no twitter",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -62,7 +62,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "user2",
+        username: "user4",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -73,7 +73,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "piyush",
-        text: "Wow!",
+        text: "thank god",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -87,7 +87,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "if i let you know, i'm here for you.",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -100,8 +100,8 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "user4",
-        text: "heeeeeeeeeeee",
+        username: "user1",
+        text: "cause it's you",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -111,7 +111,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "piyush",
-        text: "pheww!",
+        text: "and i am in love with you!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],

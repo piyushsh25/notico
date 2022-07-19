@@ -47,16 +47,15 @@ export const addPostCommentHandler = function (schema, request) {
       );
     }
     const { postId } = request.params;
-    const { commentData } = JSON.parse(request.requestBody);
-
+    const {text} = JSON.parse(request.requestBody);
+    console.log(text)
     const comment = {
       _id: uuid(),
-      ...commentData,
+      text: text,
       username: user.username,
       votes: { upvotedBy: [], downvotedBy: [] },
       createdAt: formatDate(),
       updatedAt: formatDate(),
-      img:user.img
     };
     const post = schema.posts.findBy({ _id: postId }).attrs;
     post.comments.push(comment);
