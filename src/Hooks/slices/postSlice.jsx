@@ -171,7 +171,7 @@ const postSlice = createSlice({
         },
         [postCommentHandler.fulfilled]: (state, action) => {
             state.postCommentState = "fulfilled"
-            console.log("success")
+            state.commentData=""
         },
         [postCommentHandler.rejected]: (state, action) => {
             state.postCommentState = "rejected"

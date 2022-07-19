@@ -28,7 +28,7 @@ export default function CommentPage({ post, setShowCommentPage }) {
             {singlePostState === "loading" && <CircularProgress className="circular-progress-loading" />}
             {singlePostState === "error" && <div>Couldn't load comments please try later.</div>}
             <div className='comment-model-cta'>
-                <TextField id="standard-basic" label="Comment" variant="standard" className="comment-modal-input" onChange={(e) => dispatch(postAction.setCommentHandler(e.target.value))} />
+                <TextField id="standard-basic" label="Comment" variant="standard" className="comment-modal-input" onChange={(e) => dispatch(postAction.setCommentHandler(e.target.value))} value={commentData}/>
                 <ArrowCircleRightIcon className="comment-modal-button" onClick={() => commentHandler(post, commentData)} />
                 <CloseIcon className="comment-page-crossbar" onClick={() => setShowCommentPage(false)} />
             </div>
