@@ -47,7 +47,6 @@ export default function LoginForm() {
         },500)
        
     }, [state, dispatch])
-    console.log(state)
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">

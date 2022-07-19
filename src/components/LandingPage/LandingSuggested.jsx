@@ -9,9 +9,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
 import { NoticoFooter } from '../Footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../../Hooks/slices/usersSlice';
+import { getUsers, userAction } from '../../Hooks/slices/usersSlice';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { requiresAuth } from '../../backend/utils/authUtils';
 
 export const LandingSuggested = ({ Drawer }) => {
     const drawerWidth = 240;
@@ -21,7 +22,15 @@ export const LandingSuggested = ({ Drawer }) => {
         if (state === "idle") {
             dispatch(getUsers())
         }
-    }, [dispatch, state])
+        setTimeout(() => {
+            dispatch(userAction.setGetUserIdle())
+        }, 1000)
+    }, [])
+    React.useEffect(() => {
+        dispatch(getUsers())
+    }, [state.users, dispatch])
+
+    // dispatch(getUsers())
     return <Drawer
         sx={{
             width: drawerWidth,
@@ -49,6 +58,7 @@ export const LandingSuggested = ({ Drawer }) => {
             {state === "failed" && <div>
                 failed to load suggestions. refresh the page
             </div>}
+
             {users.map((user, index) => (
                 <ListItem key={index} disablePadding>
                     <ListItemButton>

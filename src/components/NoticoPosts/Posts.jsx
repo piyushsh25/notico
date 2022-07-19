@@ -10,7 +10,7 @@ export const Post = () => {
         <div className="home-page-posts-header">
             latest  Noticos
         </div>
-        {state === "loading" && <Box sx={{ display: 'flex' }}>
+        {state === "loading" && <Box sx={{ display: 'flex' }} className="circular-progress-loading landing-page-posts">
             <CircularProgress />
         </Box>}
         {state === "error" &&
@@ -18,6 +18,5 @@ export const Post = () => {
         }
 
         <PostBody />
-
     </div>
 }
