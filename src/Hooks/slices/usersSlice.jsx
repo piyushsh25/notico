@@ -1,22 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
-import { useEffect } from "react"
 
 const initialState = {
     users: [],
     state: "idle",
     error: null,
     loggedUserState: "idle",
-    loggedUserDetails: null
+    loggedUserDetails: null,
 }
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
     const response = await axios.get("/api/users")
     return response.data.users
 })
-export const getLoggedUserDetails = createAsyncThunk("users/getLoggedUserDetails", async () => {
-    const userId = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?._id
-    const response = await axios.get(`/api/users/${userId}`)
-
+export const getLoggedUserDetails = createAsyncThunk("users/getLoggedUserDetails", async (username) => {
+    const response = await axios.get(`/api/users/${username}`)
     return response.data.user
 })
 
@@ -54,6 +51,9 @@ const userSlice = createSlice({
         },
         [getLoggedUserDetails.rejected]: (state, action) => {
             state.state = "failed"
+            // console.log("failed")
+            // console.log(action.error)
+            
         },
     }
 })

@@ -3,12 +3,13 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react"
-import { deletePostHandler, disLikePostHandler, getIndividualPost, likePostHandler } from '../../Hooks/slices/postSlice';
+import { useEffect } from "react"
+import { deleteBookmarksHandler, deletePostHandler, disLikePostHandler, getIndividualPost, likePostHandler, postBookmarksHandler } from '../../Hooks/slices/postSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 export const PostsCTA = ({ post, showCommentPage, setShowCommentPage }) => {
-
+    const { bookmarks } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     useEffect(() => {
         (localStorage?.getItem("notico-details"))
@@ -20,6 +21,8 @@ export const PostsCTA = ({ post, showCommentPage, setShowCommentPage }) => {
         setShowCommentPage(() => true)
         dispatch(getIndividualPost(post))
     }
+    console.log(bookmarks)
+    let isInBookmarks;
     return <div className="notico-post-cta-buttons">
         <div>
             <div>
@@ -43,7 +46,13 @@ export const PostsCTA = ({ post, showCommentPage, setShowCommentPage }) => {
         </div>
         <div>
             <div>
-                <BookmarkIcon />
+                {isInBookmarks = bookmarks?.some((noticos) => {
+                   
+                    return noticos._id === post._id
+                })}
+
+                {!isInBookmarks ? <BookmarkBorderIcon onClick={() => dispatch(postBookmarksHandler(post))} /> :
+                    <BookmarkIcon onClick={()=>dispatch(deleteBookmarksHandler(post))}/>}
             </div>
         </div>
         {userNotico &&

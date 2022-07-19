@@ -4,8 +4,7 @@ const initialState = {
     username: "",
     password: "",
     state: "idle",
-    error: "",
-    userDetails:""
+    error: ""
 }
 export const loginButtonHandler = createAsyncThunk("auth/loginButtonHandler", async ({ username, password }) => {
     const response = await axios.post("/api/auth/login", {
