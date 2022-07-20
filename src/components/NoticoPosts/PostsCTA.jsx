@@ -26,6 +26,7 @@ export const PostsCTA = ({ post, showCommentPage }) => {
     const userNotico = post.username === localStorageUserName
     function showCommentsHandler(post) {
         dispatch(postAction.setCommentPageHandler(true))
+        dispatch(getIndividualPost(post))
     }
     let setTrue = true
     let isInBookmarks;
