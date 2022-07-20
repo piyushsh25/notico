@@ -8,8 +8,11 @@ import { LandingPage } from "./Pages/LandingPage";
 import { Login } from "./Pages/Login";
 import { NotificationPage } from "./Pages/NotificationPage";
 import { Signup } from "./Pages/Signup";
-
+import { useSelector } from "react-redux"
+import EditPostModal from "./components/Modal/EditModal";
 function App() {
+  const { showEditModal } = useSelector((store) => store.postReducer)
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -26,6 +29,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      {showEditModal && <EditPostModal />}
     </div>
   );
 }

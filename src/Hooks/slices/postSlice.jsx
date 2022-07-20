@@ -12,12 +12,15 @@ const initialState = {
     singlePostState: "idle",
     singlePostDetails: null,
     postCommentState: "idle",
-    commentData: "",
+    commentDasta: "",
     postBookmarkState: "idle",
     deleteBookmarkState: "idle",
     getBookmarkState: "idle",
     bookmarks: [],
-    showCommentPage: false
+    showCommentPage: false,
+    showEditModal: false,
+    postToEdit: null,
+    editPostState: "idle"
 }
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
     const { data } = await axios.get("/api/posts")
@@ -124,7 +127,18 @@ export const getBookmarksHandler = createAsyncThunk("post/getBookmarksHandler", 
     )
     return getBookmarkResponse.data.bookmarks
 })
-
+export const editCommentHandler = createAsyncThunk("post/editPostHandler", async ({ postId, postContent: content }) => {
+    const encodedToken = localStorage.getItem("notico-token")
+    const editCommentResponse = await axios.post(`/api/posts/edit/${postId}`,
+        { content },
+        {
+            headers: {
+                authorization: encodedToken
+            }
+        }
+    )
+    return editCommentResponse.data.posts
+})
 const postSlice = createSlice({
     name: "posts",
     initialState,
@@ -140,6 +154,11 @@ const postSlice = createSlice({
         },
         setCommentPageHandler: (state, action) => {
             state.showCommentPage = action.payload
+        },
+        setEditModalHandler: (state, action) => {
+            const { setTrue, post } = action.payload
+            state.showEditModal = setTrue
+            state.postToEdit = post
         }
     },
     extraReducers: {
@@ -247,9 +266,24 @@ const postSlice = createSlice({
         [getBookmarksHandler.fulfilled]: (state, action) => {
             state.getBookmarkState = "fulfilled"
             state.bookmarks = action.payload
+            state.bookmarks.filter((bookmark) => {
+                return bookmark === state.post
+            })
         },
         [getBookmarksHandler.rejected]: (state, action) => {
             state.getBookmarkState = "rejected"
+        },
+        [editCommentHandler.pending]: (state, action) => {
+            state.editPostState = "loading"
+        },
+        [editCommentHandler.fulfilled]: (state, action) => {
+            state.editPostState = "fulfilled"
+            state.posts = action.payload
+            state.showEditModal = false
+        },
+        [editCommentHandler.rejected]: (state, action) => {
+            state.editPostState = "rejected"
+            console.log(action.error)
         },
     }
 })
