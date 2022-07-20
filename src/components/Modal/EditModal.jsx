@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { editCommentHandler, getBookmarksHandler, postAction } from '../../Hooks/slices/postSlice';
+import { deleteBookmarksHandler, editCommentHandler, getBookmarksHandler, postAction, postBookmarksHandler } from '../../Hooks/slices/postSlice';
 import TextField from '@mui/material/TextField';
 
 const style = {
@@ -20,12 +20,18 @@ const style = {
 };
 
 export default function EditPostModal() {
-  const { showEditModal, postToEdit,bookmarks } = useSelector((store) => store.postReducer)
+  const { showEditModal, postToEdit, bookmarks } = useSelector((store) => store.postReducer)
   const dispatch = useDispatch()
   const { _id: postId } = postToEdit
-  async function editCommentTrigger(postId, postContent) {
+  async function editCommentTrigger(postId, postContent, postToEdit) {
     await dispatch(editCommentHandler({ postId, postContent }))
-    await dispatch(getBookmarksHandler())
+    const isInBookMark = bookmarks.some((bookmark) => {
+      return bookmark._id === postId
+    })
+    if (isInBookMark) {
+      await dispatch(deleteBookmarksHandler(postToEdit))
+      await dispatch(postBookmarksHandler(postToEdit))
+    }
   }
 
   const [postContent, setPostContent] = React.useState(postToEdit.content)
@@ -52,7 +58,7 @@ export default function EditPostModal() {
               variant="standard"
             />
           </Typography>
-          <Button variant="contained" onClick={() => editCommentTrigger(postId, postContent)}>Edit</Button>
+          <Button variant="contained" onClick={() => editCommentTrigger(postId, postContent, postToEdit)}>Edit</Button>
         </Box>
       </Modal>
     </div>
