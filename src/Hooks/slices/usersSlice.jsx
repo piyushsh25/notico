@@ -51,9 +51,6 @@ const userSlice = createSlice({
         },
         [getLoggedUserDetails.rejected]: (state, action) => {
             state.state = "failed"
-            // console.log("failed")
-            // console.log(action.error)
-            
         },
     }
 })

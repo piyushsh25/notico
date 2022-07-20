@@ -8,23 +8,24 @@ import { deleteBookmarksHandler, deletePostHandler, disLikePostHandler, getBookm
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import EditIcon from '@mui/icons-material/Edit';
 export const PostsCTA = ({ post, showCommentPage }) => {
-    const { bookmarks } = useSelector((store) => store.postReducer)
+    const { bookmarks, showEditModal,posts } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     useEffect(() => {
         (localStorage?.getItem("notico-details"))
     })
     useEffect(() => {
         dispatch(getBookmarksHandler())
-    }, [])
+    }, [dispatch,posts])
     const localStorageUserName = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     const isLiked = post.likes.likedBy.some(user => user.username === localStorageUserName)
-    console.log(localStorageUserName)
     const userNotico = post.username === localStorageUserName
     function showCommentsHandler(post) {
         dispatch(postAction.setCommentPageHandler(true))
         dispatch(getIndividualPost(post))
     }
+    let setTrue = true
     let isInBookmarks;
     return <div className="notico-post-cta-buttons">
         <div>
@@ -44,11 +45,6 @@ export const PostsCTA = ({ post, showCommentPage }) => {
         </div>
         <div>
             <div>
-                <ShareIcon />
-            </div>
-        </div>
-        <div>
-            <div>
                 {isInBookmarks = bookmarks?.some((noticos) => {
 
                     return noticos._id === post._id
@@ -58,10 +54,18 @@ export const PostsCTA = ({ post, showCommentPage }) => {
                     <BookmarkIcon onClick={() => dispatch(deleteBookmarksHandler(post))} />}
             </div>
         </div>
-        {userNotico &&
+        <div>
             <div>
+                <ShareIcon />
+            </div>
+        </div>
+        {userNotico &&
+            <div className='cta-user-delete-edit'>
                 <div>
-                    <DeleteIcon onClick={() => dispatch(deletePostHandler(post))} color="success" />
+                    <DeleteIcon onClick={() => dispatch(deletePostHandler(post))} color="primary" />
+                </div>
+                <div>
+                    <EditIcon color="success" onClick={() => dispatch(postAction.setEditModalHandler({ setTrue, post }))} />
                 </div>
             </div>}
 
