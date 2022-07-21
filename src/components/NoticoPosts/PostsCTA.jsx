@@ -11,6 +11,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import EditIcon from '@mui/icons-material/Edit';
 import { red } from '@mui/material/colors';
 import { blue } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
 
 export const PostsCTA = ({ post, showCommentPage }) => {
     const { bookmarks, showEditModal, posts } = useSelector((store) => store.postReducer)
@@ -40,10 +41,20 @@ export const PostsCTA = ({ post, showCommentPage }) => {
         }
 
     }
+    const navigate = useNavigate()
+    function addToBookmarkTrigger(post) {
+        const token = (localStorage?.getItem("notico-token"))
+        token ? dispatch(postBookmarksHandler(post)) : navigate("/login")
+    }
+    function likePostTrigger(post) {
+        const token = (localStorage?.getItem("notico-token"))
+        token ? dispatch(likePostHandler(post)) : navigate("/login")
+
+    }
     return <div className="notico-post-cta-buttons">
         <div>
             <div>
-                {isLiked ? <FavoriteIcon color="primary" onClick={() => dispatch(disLikePostHandler(post))} /> : <FavoriteBorderIcon onClick={() => dispatch(likePostHandler(post))} />}
+                {isLiked ? <FavoriteIcon color="primary" onClick={() => dispatch(disLikePostHandler(post))} /> : <FavoriteBorderIcon onClick={() => likePostTrigger(post)} />}
 
             </div>
             <div>
@@ -63,8 +74,8 @@ export const PostsCTA = ({ post, showCommentPage }) => {
                     return noticos._id === post._id
                 })}
 
-                {!isInBookmarks ? <BookmarkBorderIcon onClick={() => dispatch(postBookmarksHandler(post))} /> :
-                    <BookmarkIcon onClick={() => dispatch(deleteBookmarksHandler(post))} sx={{ color: blue[500] }}/>}
+                {!isInBookmarks ? <BookmarkBorderIcon onClick={() => addToBookmarkTrigger(post)} /> :
+                    <BookmarkIcon onClick={() => dispatch(deleteBookmarksHandler(post))} sx={{ color: blue[500] }} />}
             </div>
         </div>
         <div>
@@ -75,7 +86,7 @@ export const PostsCTA = ({ post, showCommentPage }) => {
         {userNotico &&
             <div className='cta-user-delete-edit'>
                 <div>
-                    <DeleteIcon onClick={() => deleteIconTrigger(post)} sx={{ color: red[500] }}/>
+                    <DeleteIcon onClick={() => deleteIconTrigger(post)} sx={{ color: red[500] }} />
                 </div>
                 <div>
                     <EditIcon color="success" onClick={() => dispatch(postAction.setEditModalHandler({ setTrue, post }))} />
