@@ -11,14 +11,25 @@ import { useSelector, useDispatch } from "react-redux"
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import "./CommentPage.css"
+import { useNavigate } from "react-router-dom"
 import { getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
 export default function CommentPage({ post }) {
     const { singlePostState, singlePostDetails, commentData } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
+    const token = localStorage?.getItem("notico-token")
+    React.useEffect(() => {
+        localStorage?.getItem("notico-token")
+    })
+    const navigate = useNavigate()
     async function commentHandler(post, commentData) {
-        await dispatch(postCommentHandler({ singlePostDetails, commentData }))
-        await dispatch(getIndividualPost(singlePostDetails))
-        await dispatch(getPosts())
+        if (token) {
+            await dispatch(postCommentHandler({ singlePostDetails, commentData }))
+            await dispatch(getIndividualPost(singlePostDetails))
+            await dispatch(getPosts())
+        }
+        else {
+            navigate("/login")
+        }
     }
     return (<div className='comment-page'>
         <List className="comment-container">
