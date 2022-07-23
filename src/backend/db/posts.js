@@ -33,7 +33,7 @@ export const posts = [
           upvotedBy: [],
           downvotedBy: [],
         },
-        img: "https://zevno.n-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
+        img: "https://zevnon-react.netlify.app/static/media/main-img.9629d15c5937f344a761.png"
       },
       {
         _id: uuid(),
