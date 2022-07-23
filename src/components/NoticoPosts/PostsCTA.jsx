@@ -23,6 +23,7 @@ export const PostsCTA = ({ post }) => {
         dispatch(getBookmarksHandler())
     }, [dispatch, posts])
     const localStorageUserName = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
+    //check if the user has liked the comment already
     const isLiked = post.likes.likedBy.some(user => user.username === localStorageUserName)
     const userNotico = post.username === localStorageUserName
     function showCommentsHandler(post) {
@@ -30,12 +31,16 @@ export const PostsCTA = ({ post }) => {
         dispatch(getIndividualPost(post))
     }
     let setTrue = true
+    //check if the post is in the bookmarks
     let isInBookmarks;
     async function deleteIconTrigger(post) {
+        //delete the post
         await dispatch(deletePostHandler(post))
+        //check if the post exists in the bookmark
         const isInBookmark = bookmarks.some((bookmark) => {
             return bookmark._id === post._id
         })
+        //if exists, delete it as well
         if (isInBookmark) {
             await dispatch(deleteBookmarksHandler(post))
         }

@@ -7,6 +7,6 @@ export const Logout = () => {
         setTimeout(() => {
             navigate("/")
         }, 1000)
-    })
+    },[])
     return <div>Logging you out</div>
 }
