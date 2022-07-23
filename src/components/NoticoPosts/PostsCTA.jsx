@@ -13,7 +13,7 @@ import { red } from '@mui/material/colors';
 import { blue } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 
-export const PostsCTA = ({ post, showCommentPage }) => {
+export const PostsCTA = ({ post }) => {
     const { bookmarks, showEditModal, posts } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -70,7 +70,6 @@ export const PostsCTA = ({ post, showCommentPage }) => {
         <div>
             <div>
                 {isInBookmarks = bookmarks?.some((noticos) => {
-
                     return noticos._id === post._id
                 })}
 

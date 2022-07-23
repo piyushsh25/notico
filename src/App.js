@@ -10,6 +10,8 @@ import { NotificationPage } from "./Pages/NotificationPage";
 import { Signup } from "./Pages/Signup";
 import { useSelector } from "react-redux"
 import EditPostModal from "./components/Modal/EditModal";
+import { SinglePost } from "./Pages/SinglePost";
+import SinglePageComponent from "./components/Single-Post/SinglePage";
 function App() {
   const { showEditModal } = useSelector((store) => store.postReducer)
 
@@ -18,6 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/:postId" element={<SinglePageComponent/>} />
           <Route element={<RequiresAuth />}>
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/logout" element={<Logout />} />

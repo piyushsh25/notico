@@ -26,6 +26,8 @@ export const posts = [
       {
         _id: uuid(),
         username: "user1",
+        firstName: "user1",
+        lastName: "user1",
         text: "true elons hehe",
         votes: {
           upvotedBy: [],
@@ -37,6 +39,8 @@ export const posts = [
         _id: uuid(),
         username: "user2",
         text: "Wow yes!",
+        firstName: "user2",
+        lastName: "user2",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -63,6 +67,8 @@ export const posts = [
       {
         _id: uuid(),
         username: "user4",
+        firstName: "user4",
+        lastName: "user4",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -73,6 +79,8 @@ export const posts = [
       {
         _id: uuid(),
         username: "piyush",
+        firstName: "piyush",
+        lastName: "piyush",
         text: "thank god",
         votes: {
           upvotedBy: [],
@@ -102,6 +110,8 @@ export const posts = [
         _id: uuid(),
         username: "user1",
         text: "cause it's you",
+        firstName: "user1",
+        lastName: "user1",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -111,6 +121,8 @@ export const posts = [
       {
         _id: uuid(),
         username: "piyush",
+        firstName: "piyush",
+        lastName: "piyush",
         text: "and i am in love with you!",
         votes: {
           upvotedBy: [],

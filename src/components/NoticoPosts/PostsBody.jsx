@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getPosts } from "../../Hooks/slices/postSlice"
 import { PostsCTA } from "./PostsCTA"
 import CommentPage from "../Comment/CommentPage";
+import { Link } from "react-router-dom";
 
 export const PostBody = () => {
     const { state, posts, showCommentPage } = useSelector((store) => store.postReducer)
@@ -31,9 +32,11 @@ export const PostBody = () => {
                             </div>
                         </div>
                         <div className="notico-post-content">
-                            {post.content}
+                            <Link to={`${post._id}`} className="notico-post-content-link">
+                                {post.content}
+                            </Link>
                         </div>
-                        <PostsCTA post={post} showCommentPage={showCommentPage} />
+                        <PostsCTA post={post} />
                     </div>
                 </div>
                 {showCommentPage && <CommentPage post={post} />}
