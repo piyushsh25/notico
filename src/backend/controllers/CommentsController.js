@@ -47,11 +47,13 @@ export const addPostCommentHandler = function (schema, request) {
       );
     }
     const { postId } = request.params;
-    const {text} = JSON.parse(request.requestBody);
+    const { text } = JSON.parse(request.requestBody);
     const comment = {
       _id: uuid(),
       text: text,
       username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
       votes: { upvotedBy: [], downvotedBy: [] },
       createdAt: formatDate(),
       updatedAt: formatDate(),

@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import "./LandingPage.css"
-import Textarea from '../CreateNotico/TextArea';
-
+import "../LandingPage/LandingPage.css"
 import { Post } from '../NoticoPosts/Posts';
-import { LandingCTA } from './LandingCTA';
-import { LandingSuggested } from './LandingSuggested';
+import { LandingCTA } from '../LandingPage/LandingCTA';
+import { LandingSuggested } from '../LandingPage/LandingSuggested';
 import { Header } from '../Header/Header';
 
 import { AppBar, Drawer, DrawerHeader, LandingPageActions } from "../../Hooks/LandingControllers"
-export default function HomePage() {
+import { PostSingle } from './PostSingle';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPosts } from '../../Hooks/slices/postSlice';
+export default function SinglePageComponent() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -21,23 +22,31 @@ export default function HomePage() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [showAction,setShowAction] = React.useState(false)
+
   //create post cta
-  const [showAction, setShowAction] = React.useState(false)
-    function showActionHandler(value) {
-        setShowAction(value)
+  function showActionHandler(value) {
+    setShowAction(value)
+  }
+  const {state}=useSelector((store)=>store.postReducer)
+  const dispatch=useDispatch()
+  React.useEffect(() => {
+    if (state === "idle") {
+        dispatch(getPosts())
     }
-  
+
+}, [state, dispatch])
+
   return (
-    <Box sx={{ display: 'flex' }} onClick={()=>showActionHandler(false)}>
+    <Box sx={{ display: 'flex' }} onClick={() => showActionHandler(false)}>
       <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
       <LandingCTA theme={theme} Drawer={Drawer} DrawerHeader={DrawerHeader} handleDrawerClose={handleDrawerClose} open={open} LandingPageActions={LandingPageActions} />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="post-body-landing-page">
         <DrawerHeader />
         {/* create new posts */}
-        <Textarea showAction={showAction} setShowAction={setShowAction} showActionHandler={showActionHandler} onClick={()=>showActionHandler(true)}/>
         {/* the posts {noticos} */}
         <Typography paragraph>
-          <Post />
+          <PostSingle />
         </Typography>
       </Box>
       <LandingSuggested Drawer={Drawer} />

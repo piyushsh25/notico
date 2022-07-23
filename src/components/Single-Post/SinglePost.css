@@ -1,0 +1,7 @@
+.notico-liked-display{
+    display: flex;
+}
+.notico-liked-display .suggested-users-icons{
+    width: 2rem;
+    height: 2rem;
+}
