@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom"
 import { red } from '@mui/material/colors';
 import { deleteCommentHandler, getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { CommentCTA } from './CommentCTA';
 export default function CommentPage({ post }) {
     const { singlePostState, singlePostDetails, commentData } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
@@ -40,6 +41,7 @@ export default function CommentPage({ post }) {
         await dispatch(getIndividualPost(post))
         await dispatch(getPosts())
     }
+    console.log(singlePostDetails)
     return (<div className='comment-page'>
         <List className="comment-container">
             {singlePostState === "loading" && <CircularProgress className="circular-progress-loading" />}
@@ -72,8 +74,10 @@ export default function CommentPage({ post }) {
                         }
 
                     />
+                   
                     {hasCommented = comment.username === localStorageUser}
                     {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(singlePostDetails, comment)} />}
+                    <CommentCTA {...comment}/>
                 </ListItem>
             })}
         </List>

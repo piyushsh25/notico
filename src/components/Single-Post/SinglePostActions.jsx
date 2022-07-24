@@ -9,6 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { red } from '@mui/material/colors';
 import { useDispatch } from 'react-redux';
 import { deleteCommentHandler, getIndividualPost, getPosts, } from '../../Hooks/slices/postSlice';
+import { CommentCTA } from '../Comment/CommentCTA';
+import { Comment } from '@mui/icons-material';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -65,28 +67,29 @@ export default function SinglePostActions(postToRender) {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                {postToRender.comments.map((post) => {
+                {postToRender.comments.map((comment) => {
                     return <>
-                        <div className="notico-post" key={post._id}>
+                        <div className="notico-post" key={comment._id}>
                             <div className="notico-post-icon">
-                                <img src={post.img} alt="profile-pic" className="suggested-users-icons" />
+                                <img src={comment.img} alt="profile-pic" className="suggested-users-icons" />
                             </div>
                             <div className="notico-post-content">
                                 <div className="notico-post-user">
                                     <div className="notico-post-user-name">
-                                        {post.firstName + " " + post.lastName}
+                                        {comment.firstName + " " + comment.lastName}
                                     </div>
                                     <div className="notico-post-user-username">
-                                        @{post.username}
+                                        @{comment.username}
                                     </div>
                                 </div>
                                 <div className="notico-post-content">
-                                    {post.text}
+                                    {comment.text}
 
                                 </div>
                             </div>
-                            {hasCommented = post.username === localStorageUser}
-                            {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(postToRender, post)} />}
+                            {hasCommented = comment.username === localStorageUser}
+                            {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(postToRender, comment)} />}
+                            <CommentCTA {...comment}/>
                         </div>
 
                     </>
