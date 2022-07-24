@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createPostHandler, deleteBookmarksHandler, deletePostHandler, disLikePostHandler, editCommentHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
-export { createPostHandler, deleteBookmarksHandler, deletePostHandler, disLikePostHandler, editCommentHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+import { createPostHandler, deleteBookmarksHandler, deleteCommentHandler, deletePostHandler, disLikePostHandler, editCommentHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+export { createPostHandler, deleteCommentHandler, deleteBookmarksHandler, deletePostHandler, disLikePostHandler, editCommentHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
 
 const postSlice = createSlice({
     name: "posts",
@@ -147,7 +147,7 @@ const postSlice = createSlice({
         [editCommentHandler.rejected]: (state, action) => {
             state.editPostState = "rejected"
             console.log(action.error)
-        },
+        }
     }
 })
 export const postReducer = postSlice.reducer

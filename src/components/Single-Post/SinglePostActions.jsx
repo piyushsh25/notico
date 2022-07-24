@@ -4,10 +4,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import "./SinglePost.css"
+import "./SinglePost.css";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { red } from '@mui/material/colors';
+import { useDispatch } from 'react-redux';
+import { deleteCommentHandler, getIndividualPost, getPosts, } from '../../Hooks/slices/postSlice';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -44,7 +47,15 @@ export default function SinglePostActions(postToRender) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    console.log(postToRender)
+    const dispatch = useDispatch()
+
+    async function deleteCommentTrigger(post, comment) {
+        await dispatch(deleteCommentHandler({ post, comment }))
+        await dispatch(getIndividualPost(post))
+        await dispatch(getPosts())
+    }
+    const localStorageUser = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
+    let hasCommented;
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -74,6 +85,8 @@ export default function SinglePostActions(postToRender) {
 
                                 </div>
                             </div>
+                            {hasCommented = post.username === localStorageUser}
+                            {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(postToRender, post)} />}
                         </div>
 
                     </>
@@ -86,13 +99,14 @@ export default function SinglePostActions(postToRender) {
                             <img src={user.img} alt="profile-pic" className="suggested-users-icons" />
                         </div>
                         <div className="notico-post-user">
-                                    <div className="notico-post-user-name">
-                                        {user.firstName + " " + user.lastName}
-                                    </div>
-                                    <div className="notico-post-user-username">
-                                        @{user.username}
-                                    </div>
-                                </div>
+                            <div className="notico-post-user-name">
+                                {user.firstName + " " + user.lastName}
+                            </div>
+                            <div className="notico-post-user-username">
+                                @{user.username}
+                            </div>
+                        </div>
+
                     </div>
                 })}
             </TabPanel>

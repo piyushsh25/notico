@@ -13,7 +13,7 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import "./CommentPage.css"
 import { useNavigate } from "react-router-dom"
 import { red } from '@mui/material/colors';
-import { getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
+import { deleteCommentHandler, getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 export default function CommentPage({ post }) {
     const { singlePostState, singlePostDetails, commentData } = useSelector((store) => store.postReducer)
@@ -34,6 +34,11 @@ export default function CommentPage({ post }) {
         else {
             navigate("/login")
         }
+    }
+    async function deleteCommentTrigger(post, comment) {
+        await dispatch(deleteCommentHandler({ post, comment }))
+        await dispatch(getIndividualPost(post))
+        await dispatch(getPosts())
     }
     return (<div className='comment-page'>
         <List className="comment-container">
@@ -67,8 +72,8 @@ export default function CommentPage({ post }) {
                         }
 
                     />
-                    {hasCommented=comment.username===localStorageUser}
-                    {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }}/>}
+                    {hasCommented = comment.username === localStorageUser}
+                    {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(singlePostDetails, comment)} />}
                 </ListItem>
             })}
         </List>
