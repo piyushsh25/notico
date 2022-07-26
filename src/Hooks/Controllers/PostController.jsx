@@ -21,6 +21,7 @@ export const initialState = {
     showEditModal: false,
     postToEdit: null,
     editPostState: "idle",
+    likeCommentState: "idle"
 }
 //post handlers
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
@@ -94,9 +95,9 @@ export const postCommentHandler = createAsyncThunk("post/postCommentHandler", as
     return postComment.data.comments
 
 })
-export const editCommentHandler = createAsyncThunk("post/editPostHandler", async ({ postId, postContent: content }) => {
+export const editPostHandler = createAsyncThunk("post/editPostHandler", async ({ postId, postContent: content }) => {
     const encodedToken = localStorage.getItem("notico-token")
-    const editCommentResponse = await axios.post(`/api/posts/edit/${postId}`,
+    const editPostResponse = await axios.post(`/api/posts/edit/${postId}`,
         { content },
         {
             headers: {
@@ -104,13 +105,13 @@ export const editCommentHandler = createAsyncThunk("post/editPostHandler", async
             }
         }
     )
-    return editCommentResponse.data.posts
+    return editPostResponse.data.posts
 })
 export const deleteCommentHandler = createAsyncThunk("comment/deleteCommentHandler", async ({ post, comment }) => {
     const encodedToken = localStorage.getItem("notico-token")
     const { _id: postId } = post
     const { _id: commentId } = comment
-    const deleteCommentResponse = axios.delete(`/api/comments/delete/${postId}/${commentId}`,
+    const deleteCommentResponse = await axios.delete(`/api/comments/delete/${postId}/${commentId}`,
         {
             headers:
             {

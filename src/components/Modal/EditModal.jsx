@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteBookmarksHandler, editCommentHandler, getBookmarksHandler, postAction, postBookmarksHandler } from '../../Hooks/slices/postSlice';
+import { deleteBookmarksHandler, editPostHandler, getBookmarksHandler, postAction, postBookmarksHandler } from '../../Hooks/slices/postSlice';
 import TextField from '@mui/material/TextField';
 
 const style = {
@@ -24,7 +24,7 @@ export default function EditPostModal() {
   const dispatch = useDispatch()
   const { _id: postId } = postToEdit
   async function editCommentTrigger(postId, postContent, postToEdit) {
-    await dispatch(editCommentHandler({ postId, postContent }))
+    await dispatch(editPostHandler({ postId, postContent }))
     const isInBookMark = bookmarks.some((bookmark) => {
       return bookmark._id === postId
     })

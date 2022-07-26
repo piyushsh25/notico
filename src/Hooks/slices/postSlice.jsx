@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createPostHandler, deleteBookmarksHandler, deleteCommentHandler, deletePostHandler, disLikePostHandler, editCommentHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
-export { createPostHandler, deleteCommentHandler, deleteBookmarksHandler, deletePostHandler, disLikePostHandler, editCommentHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
-
+import { createPostHandler, deleteBookmarksHandler, deleteCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+export { createPostHandler, deleteCommentHandler, deleteBookmarksHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
 const postSlice = createSlice({
     name: "posts",
     initialState,
@@ -136,18 +135,20 @@ const postSlice = createSlice({
         [getBookmarksHandler.rejected]: (state, action) => {
             state.getBookmarkState = "rejected"
         },
-        [editCommentHandler.pending]: (state, action) => {
+        // editComment handler is edit post
+        [editPostHandler.pending]: (state, action) => {
             state.editPostState = "loading"
         },
-        [editCommentHandler.fulfilled]: (state, action) => {
+        [editPostHandler.fulfilled]: (state, action) => {
             state.editPostState = "fulfilled"
             state.posts = action.payload
             state.showEditModal = false
         },
-        [editCommentHandler.rejected]: (state, action) => {
+        [editPostHandler.rejected]: (state, action) => {
             state.editPostState = "rejected"
-            console.log(action.error)
         }
+        
+        
     }
 })
 export const postReducer = postSlice.reducer

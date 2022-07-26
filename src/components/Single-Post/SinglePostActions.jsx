@@ -89,7 +89,7 @@ export default function SinglePostActions(postToRender) {
                             </div>
                             {hasCommented = comment.username === localStorageUser}
                             {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(postToRender, comment)} />}
-                            <CommentCTA {...comment}/>
+                            {/* <CommentCTA post={postToRender} comment={comment}/> */}
                         </div>
 
                     </>

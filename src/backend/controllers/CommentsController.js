@@ -91,8 +91,11 @@ export const editPostCommentHandler = function (schema, request) {
           ],
         }
       );
-    }
+    };
     const { postId, commentId } = request.params;
+    console.log(postId)
+    console.log(commentId)
+
     const { commentData } = JSON.parse(request.requestBody);
     const post = schema.posts.findBy({ _id: postId }).attrs;
     const commentIndex = post.comments.findIndex(
@@ -196,8 +199,7 @@ export const upvotePostCommentHandler = function (schema, request) {
     const post = schema.posts.findBy({ _id: postId }).attrs;
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
-    );
-
+);
     if (
       post.comments[commentIndex].votes.upvotedBy.some(
         (currUser) => currUser._id === user._id
