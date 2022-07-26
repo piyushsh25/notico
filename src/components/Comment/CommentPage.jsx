@@ -12,9 +12,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import "./CommentPage.css"
 import { useNavigate } from "react-router-dom"
-import { red } from '@mui/material/colors';
-import { deleteCommentHandler, getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
+import { CommentCTA } from './CommentCTA';
 export default function CommentPage({ post }) {
     const { singlePostState, singlePostDetails, commentData } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
@@ -23,8 +22,7 @@ export default function CommentPage({ post }) {
         localStorage?.getItem("notico-token")
     })
     const navigate = useNavigate()
-    const localStorageUser = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
-    let hasCommented;
+
     async function commentHandler(post, commentData) {
         if (token) {
             await dispatch(postCommentHandler({ singlePostDetails, commentData }))
@@ -35,12 +33,6 @@ export default function CommentPage({ post }) {
             navigate("/login")
         }
     }
-    async function deleteCommentTrigger(post, comment) {
-        await dispatch(deleteCommentHandler({ post, comment }))
-        await dispatch(getIndividualPost(post))
-        await dispatch(getPosts())
-    }
-
     return (<div className='comment-page'>
         <List className="comment-container">
             {singlePostState === "loading" && <CircularProgress className="circular-progress-loading" />}
@@ -73,8 +65,8 @@ export default function CommentPage({ post }) {
                         }
 
                     />
-                    {hasCommented = comment.username === localStorageUser}
-                    {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(singlePostDetails, comment)} />}
+
+                    <CommentCTA post={singlePostDetails} comment={comment} />
                 </ListItem>
             })}
         </List>

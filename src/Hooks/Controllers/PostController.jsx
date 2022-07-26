@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 export const initialState = {
     posts: [],
@@ -119,7 +119,35 @@ export const deleteCommentHandler = createAsyncThunk("comment/deleteCommentHandl
             }
         }
     )
-    return deleteCommentResponse.status
+    return deleteCommentResponse.data.posts
+})
+export const likeCommentHandler = createAsyncThunk("comment/likeCommentHandler", async ({ post, comment }) => {
+    const encodedToken = localStorage.getItem("notico-token")
+    const { _id: postId } = post
+    const { _id: commentId } = comment
+    const likeCommentResponse = await axios.post(`/api/comments/upvote/${postId}/${commentId}`, {},
+        {
+            headers:
+            {
+                authorization: encodedToken
+            }
+        }
+    )
+    return likeCommentResponse.data.posts
+})
+export const dislikeCommentHandler = createAsyncThunk("comment/dislikeCommentHandler", async ({ post, comment }) => {
+    const encodedToken = localStorage.getItem("notico-token")
+    const { _id: postId } = post
+    const { _id: commentId } = comment
+    const dislikeCommentResponse = await axios.post(`/api/comments/downvote/${postId}/${commentId}`, {},
+        {
+            headers:
+            {
+                authorization: encodedToken
+            }
+        }
+    )
+    return dislikeCommentResponse.data.posts
 })
 //bookmark controllers
 export const getBookmarksHandler = createAsyncThunk("post/getBookmarksHandler", async () => {

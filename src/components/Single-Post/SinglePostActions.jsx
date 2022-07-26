@@ -5,12 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import "./SinglePost.css";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { red } from '@mui/material/colors';
-import { useDispatch } from 'react-redux';
-import { deleteCommentHandler, getIndividualPost, getPosts, } from '../../Hooks/slices/postSlice';
 import { CommentCTA } from '../Comment/CommentCTA';
-import { Comment } from '@mui/icons-material';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -49,15 +44,7 @@ export default function SinglePostActions(postToRender) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const dispatch = useDispatch()
 
-    async function deleteCommentTrigger(post, comment) {
-        await dispatch(deleteCommentHandler({ post, comment }))
-        await dispatch(getIndividualPost(post))
-        await dispatch(getPosts())
-    }
-    const localStorageUser = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
-    let hasCommented;
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -87,9 +74,8 @@ export default function SinglePostActions(postToRender) {
 
                                 </div>
                             </div>
-                            {hasCommented = comment.username === localStorageUser}
-                            {hasCommented && <DeleteIcon className="delete-comment-comment-page" sx={{ color: red[500] }} onClick={() => deleteCommentTrigger(postToRender, comment)} />}
-                            {/* <CommentCTA post={postToRender} comment={comment}/> */}
+
+                            <CommentCTA post={postToRender} comment={comment}/>
                         </div>
 
                     </>

@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import "../LandingPage/LandingPage.css"
-import { Post } from '../NoticoPosts/Posts';
 import { LandingCTA } from '../LandingPage/LandingCTA';
 import { LandingSuggested } from '../LandingPage/LandingSuggested';
 import { Header } from '../Header/Header';

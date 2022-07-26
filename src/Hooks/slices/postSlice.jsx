@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createPostHandler, deleteBookmarksHandler, deleteCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
-export { createPostHandler, deleteCommentHandler, deleteBookmarksHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+import { createPostHandler, deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+export { createPostHandler, deleteCommentHandler, deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
 const postSlice = createSlice({
     name: "posts",
     initialState,
@@ -135,7 +135,6 @@ const postSlice = createSlice({
         [getBookmarksHandler.rejected]: (state, action) => {
             state.getBookmarkState = "rejected"
         },
-        // editComment handler is edit post
         [editPostHandler.pending]: (state, action) => {
             state.editPostState = "loading"
         },
@@ -146,9 +145,14 @@ const postSlice = createSlice({
         },
         [editPostHandler.rejected]: (state, action) => {
             state.editPostState = "rejected"
-        }
-        
-        
+        },
+        [likeCommentHandler.fulfilled]: (state, action) => {
+            state.posts = action.payload
+        },
+
+        [dislikeCommentHandler.fulfilled]: (state, action) => {
+            state.posts = action.payload
+        },
     }
 })
 export const postReducer = postSlice.reducer
