@@ -21,7 +21,8 @@ export const initialState = {
     showEditModal: false,
     postToEdit: null,
     editPostState: "idle",
-    likeCommentState: "idle"
+    likeCommentState: "idle",
+    editCommentModal:false
 }
 //post handlers
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {

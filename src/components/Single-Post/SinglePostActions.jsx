@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import "./SinglePost.css";
 import { CommentCTA } from '../Comment/CommentCTA';
+import EditCommentModal from '../Modal/CommentEditModal';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -74,10 +75,8 @@ export default function SinglePostActions(postToRender) {
 
                                 </div>
                             </div>
-
                             <CommentCTA post={postToRender} comment={comment}/>
                         </div>
-
                     </>
                 })}
             </TabPanel>
@@ -99,6 +98,8 @@ export default function SinglePostActions(postToRender) {
                     </div>
                 })}
             </TabPanel>
+            {/* edit comment modal feat */}
+            <EditCommentModal/>
         </Box>
     );
 }

@@ -17,11 +17,18 @@ const postSlice = createSlice({
         setCommentPageHandler: (state, action) => {
             state.showCommentPage = action.payload
         },
+        // edit post
         setEditModalHandler: (state, action) => {
             const { setTrue, post } = action.payload
             state.showEditModal = setTrue
             state.postToEdit = post
-        }
+        },
+        // edit comment
+        setEditCommentModalHandler: (state, action) => {
+            // set the edit modal to true and comment page to false
+            state.editCommentModal=true
+            state.showCommentPage = false 
+        },
     },
     extraReducers: {
         [getPosts.pending]: (state, action) => {

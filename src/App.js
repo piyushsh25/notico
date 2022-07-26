@@ -12,6 +12,7 @@ import { useSelector } from "react-redux"
 import EditPostModal from "./components/Modal/EditModal";
 import SinglePageComponent from "./components/Single-Post/SinglePage";
 import MockmanEs from "mockman-js";
+import EditCommentModal from "./components/Modal/CommentEditModal";
 function App() {
   const { showEditModal } = useSelector((store) => store.postReducer)
 
@@ -34,6 +35,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       {showEditModal && <EditPostModal />}
+     
     </div>
   );
 }

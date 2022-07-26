@@ -11,6 +11,7 @@ import { AppBar, Drawer, DrawerHeader, LandingPageActions } from "../../Hooks/La
 import { PostSingle } from './PostSingle';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../Hooks/slices/postSlice';
+import EditCommentModal from '../Modal/CommentEditModal';
 export default function SinglePageComponent() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -21,20 +22,19 @@ export default function SinglePageComponent() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [showAction,setShowAction] = React.useState(false)
+  const [showAction, setShowAction] = React.useState(false)
 
   //create post cta
   function showActionHandler(value) {
     setShowAction(value)
   }
-  const {state}=useSelector((store)=>store.postReducer)
-  const dispatch=useDispatch()
+  const { state } = useSelector((store) => store.postReducer)
+  const dispatch = useDispatch()
   React.useEffect(() => {
     if (state === "idle") {
-        dispatch(getPosts())
+      dispatch(getPosts())
     }
-
-}, [state, dispatch])
+  }, [state, dispatch])
 
   return (
     <Box sx={{ display: 'flex' }} onClick={() => showActionHandler(false)}>
@@ -49,6 +49,7 @@ export default function SinglePageComponent() {
         </Typography>
       </Box>
       <LandingSuggested Drawer={Drawer} />
+     
     </Box>
   );
 }
