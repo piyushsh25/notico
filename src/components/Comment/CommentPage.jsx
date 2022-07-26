@@ -10,17 +10,26 @@ import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch } from "react-redux"
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import EditIcon from '@mui/icons-material/Edit';
 import "./CommentPage.css"
 import { useNavigate } from "react-router-dom"
 import { getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
+import { CommentCTA } from './CommentCTA';
 export default function CommentPage({ post }) {
     const { singlePostState, singlePostDetails, commentData } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     const token = localStorage?.getItem("notico-token")
+    const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     React.useEffect(() => {
         localStorage?.getItem("notico-token")
     })
     const navigate = useNavigate()
+    const editCommentTrigger = (post, comment) => {
+        navigate(`/${post._id}`)
+        const setTrue = true;
+        dispatch(postAction.setEditCommentModalHandler({ setTrue, comment }))
+    }
+    let hasCommented;
     async function commentHandler(post, commentData) {
         if (token) {
             await dispatch(postCommentHandler({ singlePostDetails, commentData }))
@@ -63,6 +72,11 @@ export default function CommentPage({ post }) {
                         }
 
                     />
+                    {hasCommented = comment.username === username}
+                    {hasCommented && <EditIcon color="success" className="edit-comment-comment-page" onClick={() => editCommentTrigger(singlePostDetails, comment)} />}
+
+                    <CommentCTA post={singlePostDetails} comment={comment} />
+
                 </ListItem>
             })}
         </List>

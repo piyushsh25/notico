@@ -1,144 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
-const initialState = {
-    posts: [],
-    error: null,
-    // this is for get posts
-    state: "idle",
-    createPost: "",
-    createPostStatus: "idle",
-    likeState: "idle",
-    dislikeState: "idle",
-    singlePostState: "idle",
-    singlePostDetails: null,
-    postCommentState: "idle",
-    commentDasta: "",
-    postBookmarkState: "idle",
-    deleteBookmarkState: "idle",
-    getBookmarkState: "idle",
-    bookmarks: [],
-    showCommentPage: false,
-    showEditModal: false,
-    postToEdit: null,
-    editPostState: "idle"
-}
-export const getPosts = createAsyncThunk("posts/getPosts", async () => {
-    const { data } = await axios.get("/api/posts")
-    return data.posts
-})
-
-export const createPostHandler = createAsyncThunk("/createPostHandler", async (content) => {
-
-    const getPosts = await axios.post("/api/posts",
-        { content },
-        { headers: { authorization: localStorage.getItem("notico-token") } })
-    return getPosts.data.posts
-})
-
-export const likePostHandler = createAsyncThunk("like/likePostHandler", async (post) => {
-    const encodedToken = localStorage.getItem("notico-token")
-    const { _id: postId } = post
-    const likePostResponse = await axios.post(`/api/posts/like/${postId}`, {},
-        {
-            headers: {
-                authorization: encodedToken
-            }
-        }
-    )
-    return likePostResponse.data.posts
-})
-export const disLikePostHandler = createAsyncThunk("dislike/disLikePostHandler", async (post) => {
-    const encodedToken = localStorage.getItem("notico-token")
-    const { _id: postId } = post
-    const dislikePostResponse = await axios.post(`/api/posts/dislike/${postId}`, {},
-        {
-            headers: {
-                authorization: encodedToken
-            }
-        }
-    )
-    return dislikePostResponse.data.posts
-
-})
-export const deletePostHandler = createAsyncThunk("delete/deletePostHandler", async (post) => {
-    const encodedToken = localStorage.getItem("notico-token")
-    const postId = post._id
-    const deletedPostResponse = await axios.delete(`/api/posts/${postId}`,
-        {
-            headers: { authorization: encodedToken }
-        })
-    return deletedPostResponse.data.posts
-
-})
-export const getIndividualPost = createAsyncThunk("post/getIndividualPost", async (post) => {
-    const postId = post._id
-    const getIndividualPost = await axios.get(`/api/posts/${postId}`)
-    return getIndividualPost.data.post
-
-})
-export const postCommentHandler = createAsyncThunk("post/postCommentHandler", async ({ singlePostDetails, commentData: text }) => {
-    const encodedToken = localStorage.getItem("notico-token")
-    const postId = singlePostDetails._id
-    const postComment = await axios.post(`/api/comments/add/${postId}`,
-        { text },
-        {
-            headers: {
-                authorization: encodedToken
-            }
-        }
-    )
-    return postComment.data.comments
-
-})
-export const postBookmarksHandler = createAsyncThunk("post/postBookmarksHandler", async (post) => {
-    const postId = post._id
-    const encodedToken = localStorage.getItem("notico-token")
-    const postBookMark = await axios.post(`/api/users/bookmark/${postId}`,
-        {},
-        {
-            headers: {
-                authorization: encodedToken
-            }
-        }
-    )
-    return postBookMark.data.bookmarks
-})
-export const deleteBookmarksHandler = createAsyncThunk("post/deleteBookmarksHandler", async (post) => {
-    const postId = post._id
-    const encodedToken = localStorage.getItem("notico-token")
-    const postRemoveBookMark = await axios.post(`/api/users/remove-bookmark/${postId}`,
-        {},
-        {
-            headers: {
-                authorization: encodedToken
-            }
-        }
-    )
-    return postRemoveBookMark.data.bookmarks
-})
-export const getBookmarksHandler = createAsyncThunk("post/getBookmarksHandler", async () => {
-    const encodedToken = localStorage.getItem("notico-token")
-    const getBookmarkResponse = await axios.get(`/api/users/bookmark`,
-        {
-            headers: {
-                authorization: encodedToken
-            }
-        }
-    )
-    return getBookmarkResponse.data.bookmarks
-})
-export const editCommentHandler = createAsyncThunk("post/editPostHandler", async ({ postId, postContent: content }) => {
-    const encodedToken = localStorage.getItem("notico-token")
-    const editCommentResponse = await axios.post(`/api/posts/edit/${postId}`,
-        { content },
-        {
-            headers: {
-                authorization: encodedToken
-            }
-        }
-    )
-    return editCommentResponse.data.posts
-})
+import { createSlice } from "@reduxjs/toolkit"
+import { createPostHandler, editCommentHandler,deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+export { createPostHandler, editCommentHandler,deleteCommentHandler, deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
 const postSlice = createSlice({
     name: "posts",
     initialState,
@@ -155,10 +17,19 @@ const postSlice = createSlice({
         setCommentPageHandler: (state, action) => {
             state.showCommentPage = action.payload
         },
+        // edit post
         setEditModalHandler: (state, action) => {
             const { setTrue, post } = action.payload
             state.showEditModal = setTrue
             state.postToEdit = post
+        },
+        // edit comment
+        setEditCommentModalHandler: (state, action) => {
+            // set the edit modal to true and comment page to false
+            const {setTrue,comment}=action.payload
+            state.commentToEdit=comment
+            state.editCommentPage=setTrue
+            state.showCommentPage = false 
         }
     },
     extraReducers: {
@@ -266,24 +137,34 @@ const postSlice = createSlice({
         [getBookmarksHandler.fulfilled]: (state, action) => {
             state.getBookmarkState = "fulfilled"
             state.bookmarks = action.payload
-            state.bookmarks.filter((bookmark) => {
-                return bookmark === state.post
-            })
         },
         [getBookmarksHandler.rejected]: (state, action) => {
             state.getBookmarkState = "rejected"
         },
-        [editCommentHandler.pending]: (state, action) => {
+        [editPostHandler.pending]: (state, action) => {
             state.editPostState = "loading"
         },
-        [editCommentHandler.fulfilled]: (state, action) => {
+        [editPostHandler.fulfilled]: (state, action) => {
             state.editPostState = "fulfilled"
             state.posts = action.payload
             state.showEditModal = false
         },
-        [editCommentHandler.rejected]: (state, action) => {
+        [editPostHandler.rejected]: (state, action) => {
             state.editPostState = "rejected"
-            console.log(action.error)
+        },
+        [likeCommentHandler.fulfilled]: (state, action) => {
+            state.posts = action.payload
+        },
+
+        [dislikeCommentHandler.fulfilled]: (state, action) => {
+            state.posts = action.payload
+        },
+        
+        [editCommentHandler.fulfilled]: (state, action) => {
+            state.posts=action.payload
+        },
+        [editCommentHandler.rejected]: (state, action) => {
+            console.log("error editing post",action.error)
         },
     }
 })

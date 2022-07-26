@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import "../LandingPage/LandingPage.css"
-import { Post } from '../NoticoPosts/Posts';
 import { LandingCTA } from '../LandingPage/LandingCTA';
 import { LandingSuggested } from '../LandingPage/LandingSuggested';
 import { Header } from '../Header/Header';
@@ -22,20 +21,19 @@ export default function SinglePageComponent() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [showAction,setShowAction] = React.useState(false)
+  const [showAction, setShowAction] = React.useState(false)
 
   //create post cta
   function showActionHandler(value) {
     setShowAction(value)
   }
-  const {state}=useSelector((store)=>store.postReducer)
-  const dispatch=useDispatch()
+  const { state } = useSelector((store) => store.postReducer)
+  const dispatch = useDispatch()
   React.useEffect(() => {
     if (state === "idle") {
-        dispatch(getPosts())
+      dispatch(getPosts())
     }
-
-}, [state, dispatch])
+  }, [state, dispatch])
 
   return (
     <Box sx={{ display: 'flex' }} onClick={() => showActionHandler(false)}>
@@ -50,6 +48,7 @@ export default function SinglePageComponent() {
         </Typography>
       </Box>
       <LandingSuggested Drawer={Drawer} />
+     
     </Box>
   );
 }
