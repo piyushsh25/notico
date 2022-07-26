@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createPostHandler, deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
-export { createPostHandler, deleteCommentHandler, deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+import { createPostHandler, editCommentHandler,deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, initialState, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
+export { createPostHandler, editCommentHandler,deleteCommentHandler, deleteBookmarksHandler, likeCommentHandler, dislikeCommentHandler, deletePostHandler, disLikePostHandler, editPostHandler, getBookmarksHandler, getIndividualPost, getPosts, likePostHandler, postBookmarksHandler, postCommentHandler } from "../Controllers/PostController"
 const postSlice = createSlice({
     name: "posts",
     initialState,
@@ -26,9 +26,11 @@ const postSlice = createSlice({
         // edit comment
         setEditCommentModalHandler: (state, action) => {
             // set the edit modal to true and comment page to false
-            state.editCommentModal=true
+            const {setTrue,comment}=action.payload
+            state.commentToEdit=comment
+            state.editCommentPage=setTrue
             state.showCommentPage = false 
-        },
+        }
     },
     extraReducers: {
         [getPosts.pending]: (state, action) => {
@@ -135,9 +137,6 @@ const postSlice = createSlice({
         [getBookmarksHandler.fulfilled]: (state, action) => {
             state.getBookmarkState = "fulfilled"
             state.bookmarks = action.payload
-            state.bookmarks.filter((bookmark) => {
-                return bookmark === state.post
-            })
         },
         [getBookmarksHandler.rejected]: (state, action) => {
             state.getBookmarkState = "rejected"
@@ -159,6 +158,13 @@ const postSlice = createSlice({
 
         [dislikeCommentHandler.fulfilled]: (state, action) => {
             state.posts = action.payload
+        },
+        
+        [editCommentHandler.fulfilled]: (state, action) => {
+            state.posts=action.payload
+        },
+        [editCommentHandler.rejected]: (state, action) => {
+            console.log("error editing post",action.error)
         },
     }
 })

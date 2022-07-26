@@ -20,10 +20,11 @@ const style = {
 };
 
 export default function EditPostModal() {
+
   const { showEditModal, postToEdit, bookmarks } = useSelector((store) => store.postReducer)
   const dispatch = useDispatch()
   const { _id: postId } = postToEdit
-  async function editCommentTrigger(postId, postContent, postToEdit) {
+  async function editPostTrigger(postId, postContent, postToEdit) {
     await dispatch(editPostHandler({ postId, postContent }))
     const isInBookMark = bookmarks.some((bookmark) => {
       return bookmark._id === postId
@@ -54,11 +55,11 @@ export default function EditPostModal() {
               value={postContent}
               onChange={(e) => setPostContent(e.target.value)}
               multiline
-              maxRows={4}
+              maxRows={12}
               variant="standard"
             />
           </Typography>
-          <Button variant="contained" onClick={() => editCommentTrigger(postId, postContent, postToEdit)}>Edit</Button>
+          <Button variant="contained" onClick={() => editPostTrigger(postId, postContent, postToEdit)}>Edit</Button>
         </Box>
       </Modal>
     </div>

@@ -11,7 +11,6 @@ import { AppBar, Drawer, DrawerHeader, LandingPageActions } from "../../Hooks/La
 import { PostSingle } from './PostSingle';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../Hooks/slices/postSlice';
-import EditCommentModal from '../Modal/CommentEditModal';
 export default function SinglePageComponent() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);

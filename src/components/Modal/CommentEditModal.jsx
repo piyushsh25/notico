@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteBookmarksHandler, editPostHandler, getBookmarksHandler, postAction, postBookmarksHandler } from '../../Hooks/slices/postSlice';
 import TextField from '@mui/material/TextField';
+import { postAction,getIndividualPost, editCommentHandler,getPosts } from '../../Hooks/slices/postSlice';
 
 const style = {
     position: 'absolute',
@@ -19,13 +19,20 @@ const style = {
     p: 4,
 };
 
-export default function EditCommentModal() {
-    const { editCommentModal, postToEdit, bookmarks } = useSelector((store) => store.postReducer)
-
+export function EditCommentModal({ post }) {
+    const { editCommentPage, commentToEdit } = useSelector((store) => store.postReducer)
+    const dispatch = useDispatch()
+    // use state for changing and storing the comment
+    const [newComment, setNewComment] = React.useState(commentToEdit.text)
+    function editCommentTrigeer(post, comment,commentData) {
+        dispatch(editCommentHandler({ post, comment,commentData }))
+        dispatch(postAction.setEditCommentModalHandler(false))
+    }
     return (
         <div>
             <Modal
-                open={editCommentModal}
+                open={editCommentPage}
+                onClose={() => dispatch(postAction.setEditCommentModalHandler(false))}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -37,11 +44,13 @@ export default function EditCommentModal() {
                         <TextField
                             id="standard-multiline-flexible"
                             multiline
-                            maxRows={4}
+                            maxRows={12}
                             variant="standard"
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
                         />
                     </Typography>
-                    <Button variant="contained">Edit</Button>
+                    <Button variant="contained" onClick={() => editCommentTrigeer(post, commentToEdit,newComment)}>Edit</Button>
                 </Box>
             </Modal>
         </div>

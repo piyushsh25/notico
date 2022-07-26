@@ -2,11 +2,14 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { PostsCTA } from "../NoticoPosts/PostsCTA"
 import { getPosts } from "../../Hooks/slices/postSlice";
+import {EditCommentModal} from "../Modal/CommentEditModal"
 export const SinglePostContent = (postToRender) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getPosts())
     }, [])
+    const { editCommentPage } = useSelector((store) => store.postReducer)
+
     return <>
         <div className="notico-container" key={postToRender._id}>
             <div className="notico-post">
@@ -28,6 +31,7 @@ export const SinglePostContent = (postToRender) => {
                     <PostsCTA post={postToRender}/>
                 </div>
             </div>
+            {editCommentPage && <EditCommentModal post={postToRender}/>}
         </div>
 
 

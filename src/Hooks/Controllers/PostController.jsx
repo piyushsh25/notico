@@ -22,20 +22,22 @@ export const initialState = {
     postToEdit: null,
     editPostState: "idle",
     likeCommentState: "idle",
-    editCommentModal:false
+    editCommentPage: false,
+    commentToEdit: ""
 }
 //post handlers
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
     const { data } = await axios.get("/api/posts")
     return data.posts
 })
-
+// create post
 export const createPostHandler = createAsyncThunk("/createPostHandler", async (content) => {
     const getPosts = await axios.post("/api/posts",
         { content },
         { headers: { authorization: localStorage.getItem("notico-token") } })
     return getPosts.data.posts
 })
+// delete post
 export const deletePostHandler = createAsyncThunk("delete/deletePostHandler", async (post) => {
     const encodedToken = localStorage.getItem("notico-token")
     const postId = post._id
@@ -96,6 +98,7 @@ export const postCommentHandler = createAsyncThunk("post/postCommentHandler", as
     return postComment.data.comments
 
 })
+// edit post
 export const editPostHandler = createAsyncThunk("post/editPostHandler", async ({ postId, postContent: content }) => {
     const encodedToken = localStorage.getItem("notico-token")
     const editPostResponse = await axios.post(`/api/posts/edit/${postId}`,
@@ -108,6 +111,7 @@ export const editPostHandler = createAsyncThunk("post/editPostHandler", async ({
     )
     return editPostResponse.data.posts
 })
+// delete comment 
 export const deleteCommentHandler = createAsyncThunk("comment/deleteCommentHandler", async ({ post, comment }) => {
     const encodedToken = localStorage.getItem("notico-token")
     const { _id: postId } = post
@@ -122,6 +126,7 @@ export const deleteCommentHandler = createAsyncThunk("comment/deleteCommentHandl
     )
     return deleteCommentResponse.data.posts
 })
+// like comment
 export const likeCommentHandler = createAsyncThunk("comment/likeCommentHandler", async ({ post, comment }) => {
     const encodedToken = localStorage.getItem("notico-token")
     const { _id: postId } = post
@@ -136,6 +141,7 @@ export const likeCommentHandler = createAsyncThunk("comment/likeCommentHandler",
     )
     return likeCommentResponse.data.posts
 })
+// dislike comment
 export const dislikeCommentHandler = createAsyncThunk("comment/dislikeCommentHandler", async ({ post, comment }) => {
     const encodedToken = localStorage.getItem("notico-token")
     const { _id: postId } = post
@@ -150,6 +156,21 @@ export const dislikeCommentHandler = createAsyncThunk("comment/dislikeCommentHan
     )
     return dislikeCommentResponse.data.posts
 })
+export const editCommentHandler = createAsyncThunk("comment/editCommentHandler", async ({ post, comment,commentData }) => {
+    const encodedToken = localStorage.getItem("notico-token")
+    const { _id: postId } = post
+    const { _id: commentId } = comment
+   
+    const editCommentResponse = await axios.post(`/api/comments/edit/${postId}/${commentId}`, { commentData },
+        {
+            headers: {
+                authorization: encodedToken
+            }
+        }
+    )
+    console.log(editCommentResponse.data.posts)
+    return editCommentResponse.data.posts
+})
 //bookmark controllers
 export const getBookmarksHandler = createAsyncThunk("post/getBookmarksHandler", async () => {
     const encodedToken = localStorage.getItem("notico-token")
@@ -162,6 +183,7 @@ export const getBookmarksHandler = createAsyncThunk("post/getBookmarksHandler", 
     )
     return getBookmarkResponse.data.bookmarks
 })
+// add to bookmark
 export const postBookmarksHandler = createAsyncThunk("post/postBookmarksHandler", async (post) => {
     const postId = post._id
     const encodedToken = localStorage.getItem("notico-token")
@@ -175,6 +197,7 @@ export const postBookmarksHandler = createAsyncThunk("post/postBookmarksHandler"
     )
     return postBookMark.data.bookmarks
 })
+// delete bookmark
 export const deleteBookmarksHandler = createAsyncThunk("post/deleteBookmarksHandler", async (post) => {
     const postId = post._id
     const encodedToken = localStorage.getItem("notico-token")

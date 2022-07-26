@@ -6,7 +6,10 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import "./SinglePost.css";
 import { CommentCTA } from '../Comment/CommentCTA';
-import EditCommentModal from '../Modal/CommentEditModal';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { postAction } from '../../Hooks/slices/postSlice';
+import EditIcon from '@mui/icons-material/Edit';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -45,7 +48,16 @@ export default function SinglePostActions(postToRender) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const editCommentTrigger = (post, comment) => {
+        navigate(`/${post._id}`)
+        const setTrue = true;
+        dispatch(postAction.setEditCommentModalHandler({ setTrue, comment }))
+    }
+    const {  singlePostDetails } = useSelector((store) => store.postReducer)
+    const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
+    let hasCommented;
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -75,7 +87,9 @@ export default function SinglePostActions(postToRender) {
 
                                 </div>
                             </div>
-                            <CommentCTA post={postToRender} comment={comment}/>
+                            <CommentCTA post={postToRender} comment={comment} />
+                            {hasCommented = comment.username === username}
+                            {hasCommented && <EditIcon color="success" className="edit-comment-comment-page" onClick={() => editCommentTrigger(singlePostDetails, comment)} />}
                         </div>
                     </>
                 })}
@@ -99,7 +113,7 @@ export default function SinglePostActions(postToRender) {
                 })}
             </TabPanel>
             {/* edit comment modal feat */}
-            <EditCommentModal/>
+
         </Box>
     );
 }
