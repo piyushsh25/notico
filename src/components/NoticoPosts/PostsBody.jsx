@@ -19,20 +19,24 @@ export const PostBody = () => {
         {posts.map((post) => {
             return <div className="notico-container" key={post._id}>
                 <div className="notico-post">
-                    <div className="notico-post-icon">
-                        <img src={post.img} alt="profile-pic" className="suggested-users-icons" />
-                    </div>
-                    <div className="notico-post-content">
-                        <div className="notico-post-user">
-                            <div className="notico-post-user-name">
-                                {post.firstName + " " + post.lastName}
-                            </div>
-                            <div className="notico-post-user-username">
-                                @{post.username}
-                            </div>
+                    <Link to={`user/${post.username}`} className="notico-post-content-link">
+                        <div className="notico-post-icon">
+                            <img src={post.img} alt="profile-pic" className="suggested-users-icons" />
                         </div>
+                    </Link>
+                    <div className="notico-post-content">
+                        <Link to={`user/${post.username}`} className="notico-post-content-link">
+                            <div className="notico-post-user">
+                                <div className="notico-post-user-name">
+                                    {post.firstName + " " + post.lastName}
+                                </div>
+                                <div className="notico-post-user-username">
+                                    @{post.username}
+                                </div>
+                            </div>
+                        </Link>
                         <div className="notico-post-content">
-                            <Link to={`${post._id}`} className="notico-post-content-link">
+                            <Link to={`/${post._id}`} className="notico-post-content-link">
                                 {post.content}
                             </Link>
                         </div>

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux"
 import EditPostModal from "./components/Modal/EditModal";
 import SinglePageComponent from "./components/Single-Post/SinglePage";
 import MockmanEs from "mockman-js";
+import { UserProfile } from "./components/UserProfile/UserProfile";
 function App() {
   const { showEditModal } = useSelector((store) => store.postReducer)
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
           </Route>
           <Route path="/mock" element={<MockmanEs/>}/>
+          <Route path="user/:username" element={<UserProfile/>}/>
         </Routes>
       </BrowserRouter>
       {showEditModal && <EditPostModal />}
