@@ -7,16 +7,12 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const drawerWidth = 240;
+const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
 export const LandingPageActions = [
     {
       action: "home",
       icon: <HomeIcon />,
       link:"/"
-    },
-    {
-      action: "login",
-      icon: <ExploreIcon />,
-      link:"/login"
     },
     {
       action: "bookmarks",
@@ -31,7 +27,7 @@ export const LandingPageActions = [
     {
       action: "profile",
       icon: <AccountCircleIcon />,
-      link:"/me"
+      link:`user/${username}`
     }
   ]
 export const openedMixin = (theme) => ({

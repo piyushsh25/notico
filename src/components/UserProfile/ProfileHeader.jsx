@@ -1,7 +1,5 @@
-import { Divider } from "@mui/material"
-
 import "./Profile.css"
-export const ProfileHeader = ({ userDetails,postFromUser }) => {
+export const ProfileHeader = ({ userDetails, postFromUser }) => {
     return <>
         <div class="header-container">
             <div class="profile-header-container">

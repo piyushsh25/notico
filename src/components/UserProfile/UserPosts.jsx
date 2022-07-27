@@ -14,7 +14,6 @@ export const UserPosts = ({ postFromUser }) => {
         }
         showCommentPage ? (document.body.style.overflow = "hidden") : (document.body.style.overflow = "scroll")
     }, [state, dispatch, showCommentPage])
-    console.log(postFromUser)
     return <div className="post-body-unique-page">
         {postFromUser.map((post) => {
             return <div className="posts-container post-body-landing-page">

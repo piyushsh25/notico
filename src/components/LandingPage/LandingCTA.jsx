@@ -13,36 +13,41 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { requiresAuth } from '../../backend/utils/authUtils';
 export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions }) => {
     React.useEffect(() => {
         localStorage?.getItem("notico-token")
     })
+
+
     const token = localStorage?.getItem("notico-token")
+    const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
                 <ListItem key={'Home'} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}
-                    >
-                        <ListItemIcon
+                    <Link to={username ? `user/${username}` : "/"} className="cta-drawers-link">
+                        <ListItemButton
                             sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
                             }}
                         >
-                            <InboxIcon />
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <InboxIcon />
 
-                        </ListItemIcon>
-                        <ListItemText primary={'My profile'} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
+                            </ListItemIcon>
+                            <ListItemText primary={username? username: "My Profile"} sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </Link>
                 </ListItem>
-
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
         </DrawerHeader>
