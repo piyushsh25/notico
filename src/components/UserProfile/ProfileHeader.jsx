@@ -11,8 +11,11 @@ export const ProfileHeader = ({ userDetails, postFromUser }) => {
 
                     <div>{userDetails.firstName} {userDetails.lastName}</div>
                     <div><strong>{postFromUser.length}</strong> posts</div>
-                    <div><strong>{userDetails.followers.length}</strong> followers</div>
-                    <div><strong>{userDetails.following.length}</strong> following</div>
+                    <div>
+                        <strong>{userDetails.followers.length}</strong> followers
+                        <strong>{"     "+userDetails.following.length}</strong> following
+                    </div>
+
                 </div>
             </div>
         </div>
