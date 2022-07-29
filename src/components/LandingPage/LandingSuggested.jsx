@@ -64,12 +64,12 @@ export const LandingSuggested = ({ Drawer }) => {
                 <ListItem key={user._id} disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
-                            <Link to={`user/${user.username}`} className="cta-drawers-link">
+                            <Link to={`/user/${user.username}`} className="cta-drawers-link">
                                 <img src={user.img} alt="profile-pic" className="suggested-users-icons" />
                             </Link>
                         </ListItemIcon>
                         <div>
-                            <Link to={`user/${user.username}`} className="cta-drawers-link">
+                            <Link to={`/user/${user.username}`} className="cta-drawers-link">
                                 <ListItemText primary={(user.firstName).substring(0, 10)} />
                                 {user.firstName.length > 10 ? <>@{user.firstName.substring(0, 10)}...</> : <>@{user.username}</>}
                             </Link>

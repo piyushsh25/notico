@@ -14,7 +14,9 @@ export const UserPosts = ({ postFromUser }) => {
         }
         showCommentPage ? (document.body.style.overflow = "hidden") : (document.body.style.overflow = "scroll")
     }, [state, dispatch, showCommentPage])
+    console.log(postFromUser)
     return <div className="post-body-unique-page">
+        {postFromUser.length===0 && <div className="posts-container post-body-landing-page">No posts yet</div>}
         {postFromUser.map((post) => {
             return <div className="posts-container post-body-landing-page">
                 <div className="notico-container" key={post._id}>
