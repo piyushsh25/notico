@@ -6,7 +6,7 @@ import CommentPage from "../Comment/CommentPage";
 import { Link } from "react-router-dom";
 
 export const UserPosts = ({ postFromUser }) => {
-    const { state, posts, showCommentPage } = useSelector((store) => store.postReducer)
+    const { state, showCommentPage } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     useEffect(() => {
         if (state === "idle") {
@@ -14,7 +14,6 @@ export const UserPosts = ({ postFromUser }) => {
         }
         showCommentPage ? (document.body.style.overflow = "hidden") : (document.body.style.overflow = "scroll")
     }, [state, dispatch, showCommentPage])
-    console.log(postFromUser)
     return <div className="post-body-unique-page">
         {postFromUser.length===0 && <div className="posts-container post-body-landing-page">No posts yet</div>}
         {postFromUser.map((post) => {

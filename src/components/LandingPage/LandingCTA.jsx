@@ -19,14 +19,13 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
         localStorage?.getItem("notico-token")
     })
 
-
     const token = localStorage?.getItem("notico-token")
     const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
                 <ListItem key={'Home'} disablePadding sx={{ display: 'block' }}>
-                    <Link to={username ? `user/${username}` : "/"} className="cta-drawers-link">
+                    <Link to={username ? `/user/${username}` : "/"} className="cta-drawers-link">
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
