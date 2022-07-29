@@ -8,7 +8,7 @@ import CommentPage from "../Comment/CommentPage";
 import SinglePostActions from "./SinglePostActions";
 export const PostSingle = () => {
     const location = useLocation()
-    const idToFind = location.pathname.slice(1, location.pathname.length)
+    const idToFind = location.pathname.slice(6, location.pathname.length)
     const { posts } = useSelector((store) => store.postReducer)
     const postToRender = posts.find((post) => {
         return post._id === idToFind

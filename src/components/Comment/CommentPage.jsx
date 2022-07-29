@@ -15,6 +15,7 @@ import "./CommentPage.css"
 import { useNavigate } from "react-router-dom"
 import { getIndividualPost, getPosts, postAction, postCommentHandler } from '../../Hooks/slices/postSlice';
 import { CommentCTA } from './CommentCTA';
+import { Link } from "react-router-dom"
 export default function CommentPage({ post }) {
     const { singlePostState, singlePostDetails, commentData } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
@@ -25,7 +26,7 @@ export default function CommentPage({ post }) {
     })
     const navigate = useNavigate()
     const editCommentTrigger = (post, comment) => {
-        navigate(`/${post._id}`)
+        navigate(`/post/${post._id}`)
         const setTrue = true;
         dispatch(postAction.setEditCommentModalHandler({ setTrue, comment }))
     }
@@ -52,21 +53,25 @@ export default function CommentPage({ post }) {
 
             {singlePostDetails?.comments.map((comment) => {
                 return <ListItem alignItems="flex-start" key={comment._id}>
-                    <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src={singlePostDetails?.img} />
-                    </ListItemAvatar>
+                    <Link to={`/user/${comment.username}`} className="cta-drawers-link">
+                        <ListItemAvatar>
+                            <Avatar alt="Remy Sharp" src={singlePostDetails?.img} />
+                        </ListItemAvatar>
+                    </Link>
                     <ListItemText
                         secondary={`replying to @ ${singlePostDetails?.username}`}
                         primary={
                             <React.Fragment>
-                                <Typography
-                                    sx={{ display: 'inline' }}
-                                    component="span"
-                                    variant="body2"
-                                    color="text.primary"
-                                >
-                                    @{comment.username}    :
-                                </Typography>
+                                <Link to={`/user/${comment.username}`} className="cta-drawers-link">
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body2"
+                                        color="text.primary"
+                                    >
+                                        @{comment.username}    :
+                                    </Typography>
+                                </Link>
                                 {"  " + comment.text}
                             </React.Fragment>
                         }

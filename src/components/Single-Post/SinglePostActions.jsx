@@ -7,9 +7,10 @@ import Box from '@mui/material/Box';
 import "./SinglePost.css";
 import { CommentCTA } from '../Comment/CommentCTA';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postAction } from '../../Hooks/slices/postSlice';
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from "react-router-dom"
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -51,11 +52,11 @@ export default function SinglePostActions(postToRender) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const editCommentTrigger = (post, comment) => {
-        navigate(`/${post._id}`)
+        navigate(`/post/${post._id}`)
         const setTrue = true;
         dispatch(postAction.setEditCommentModalHandler({ setTrue, comment }))
     }
-    const {  singlePostDetails } = useSelector((store) => store.postReducer)
+    const { singlePostDetails } = useSelector((store) => store.postReducer)
     const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     let hasCommented;
     return (
@@ -70,22 +71,27 @@ export default function SinglePostActions(postToRender) {
                 {postToRender.comments.map((comment) => {
                     return <>
                         <div className="notico-post" key={comment._id}>
-                            <div className="notico-post-icon">
-                                <img src={comment.img} alt="profile-pic" className="suggested-users-icons" />
-                            </div>
-                            <div className="notico-post-content">
-                                <div className="notico-post-user">
-                                    <div className="notico-post-user-name">
-                                        {comment.firstName + " " + comment.lastName}
-                                    </div>
-                                    <div className="notico-post-user-username">
-                                        @{comment.username}
-                                    </div>
+                            <Link to={`/user/${comment.username}`} className="cta-drawers-link">
+                                <div className="notico-post-icon">
+                                    <img src={comment.img} alt="profile-pic" className="suggested-users-icons" />
                                 </div>
+                            </Link>
+                            <div className="notico-post-content">
+                                <Link to={`/user/${comment.username}`} className="cta-drawers-link">
+                                    <div className="notico-post-user">
+                                        <div className="notico-post-user-name">
+                                            {comment.firstName + " " + comment.lastName}
+                                        </div>
+                                        <div className="notico-post-user-username">
+                                            @{comment.username}
+                                        </div>
+                                    </div>
+                                </Link>
                                 <div className="notico-post-content">
                                     {comment.text}
 
                                 </div>
+
                             </div>
                             <CommentCTA post={postToRender} comment={comment} />
                             {hasCommented = comment.username === username}

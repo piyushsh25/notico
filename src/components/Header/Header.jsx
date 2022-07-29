@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Link } from 'react-router-dom';
 
 export const Header=({AppBar,open,handleDrawerOpen})=>{
     
@@ -23,9 +24,11 @@ export const Header=({AppBar,open,handleDrawerOpen})=>{
       >
         <MenuIcon />
       </IconButton>
+      <Link to="/" className="cta-drawers-link color-white">
       <Typography variant="h4" noWrap component="div" className="notico-header">
         notico
       </Typography>
+      </Link>
     </Toolbar>
   </AppBar>
 }
