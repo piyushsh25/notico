@@ -21,7 +21,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/:postId" element={<SinglePageComponent/>} />
+          <Route path="/post/:postId" element={<SinglePageComponent/>} />
           <Route element={<RequiresAuth />}>
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/logout" element={<Logout />} />

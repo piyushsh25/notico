@@ -13,6 +13,7 @@ import { getUsers, userAction } from '../../Hooks/slices/usersSlice';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { requiresAuth } from '../../backend/utils/authUtils';
+import { Link } from 'react-router-dom';
 
 export const LandingSuggested = ({ Drawer }) => {
     const drawerWidth = 240;
@@ -59,20 +60,26 @@ export const LandingSuggested = ({ Drawer }) => {
                 failed to load suggestions. refresh the page
             </div>}
 
-            {users.map((user, index) => (
-                <ListItem key={index} disablePadding>
+            {users.slice(0, 5).map((user) => (
+                <ListItem key={user._id} disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
-                            <img src={user.img} alt="profile-pic" className="suggested-users-icons" />
+                            <Link to={`user/${user.username}`} className="cta-drawers-link">
+                                <img src={user.img} alt="profile-pic" className="suggested-users-icons" />
+                            </Link>
                         </ListItemIcon>
                         <div>
-                            <ListItemText primary={(user.firstName).substring(0, 10)} />
-                            {user.firstName.length > 10 ? <>@{user.firstName.substring(0, 10)}...</> : <>@{user.username}</>}
+                            <Link to={`user/${user.username}`} className="cta-drawers-link">
+                                <ListItemText primary={(user.firstName).substring(0, 10)} />
+                                {user.firstName.length > 10 ? <>@{user.firstName.substring(0, 10)}...</> : <>@{user.username}</>}
+                            </Link>
                         </div>
                         <Button variant="contained" className="follow-button-landing-page">Follow</Button>
                     </ListItemButton>
+
                 </ListItem>
             ))}
+
         </List>
         <Divider />
         <NoticoFooter />

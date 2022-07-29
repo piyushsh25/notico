@@ -36,7 +36,7 @@ export const PostBody = () => {
                             </div>
                         </Link>
                         <div className="notico-post-content">
-                            <Link to={`/${post._id}`} className="notico-post-content-link">
+                            <Link to={`/post/${post._id}`} className="notico-post-content-link">
                                 {post.content}
                             </Link>
                         </div>
