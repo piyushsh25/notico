@@ -32,12 +32,13 @@ export const LandingSuggested = ({ Drawer }) => {
 
     // search the usernname from the localstorage and check in the database
     const localstorageUser = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
+
     if (localstorageUser) {
         var userDetailsFromDB = users?.find((user) => {
             return user.username === localstorageUser
         })
         var usersToDisplay = users?.filter((user) => {
-            return user.username !== userDetailsFromDB.username
+            return user?.username !== userDetailsFromDB?.username
         })
     }
 

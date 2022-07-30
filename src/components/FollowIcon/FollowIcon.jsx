@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 export const FollowIcon = ({ userDetailsFromDB, user }) => {
     const dispatch = useDispatch()
     const localstorageUser = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     function followUserTrigger(user) {
-        localstorageUser?dispatch(setFollowUsersHandler(user)):navigate("/login")
-        
+        localstorageUser ? dispatch(setFollowUsersHandler(user)) : navigate("/login")
+
     }
     function UnfollowUserTrigger(user) {
-        localstorageUser? dispatch(setUnFollowUsersHandler(user)):navigate("/login")
+        localstorageUser ? dispatch(setUnFollowUsersHandler(user)) : navigate("/login")
     }
     // check if it;s the user's profile
     let checkIfUserProfile = false
