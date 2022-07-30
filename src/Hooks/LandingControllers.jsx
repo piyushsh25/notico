@@ -27,7 +27,7 @@ export const LandingPageActions = [
     {
       action: "profile",
       icon: <AccountCircleIcon />,
-      link:`user/${username}`
+      link:`/user/${username}`
     }
   ]
 export const openedMixin = (theme) => ({

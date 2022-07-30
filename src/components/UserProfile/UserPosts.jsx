@@ -20,13 +20,13 @@ export const UserPosts = ({ postFromUser }) => {
             return <div className="posts-container post-body-landing-page" key={post._id}>
                 <div className="notico-container">
                     <div className="notico-post">
-                        <Link to={`user/${post.username}`} className="notico-post-content-link">
+                        <Link to={`/user/${post.username}`} className="notico-post-content-link">
                             <div className="notico-post-icon">
                                 <img src={post.img} alt="profile-pic" className="suggested-users-icons" />
                             </div>
                         </Link>
                         <div className="notico-post-content">
-                            <Link to={`user/${post.username}`} className="notico-post-content-link">
+                            <Link to={`/user/${post.username}`} className="notico-post-content-link">
                                 <div className="notico-post-user">
                                     <div className="notico-post-user-name">
                                         {post.firstName + " " + post.lastName}
