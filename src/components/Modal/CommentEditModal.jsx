@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
-import { postAction, editCommentHandler,getPosts } from '../../Hooks/slices/postSlice';
+import { postAction, editCommentHandler } from '../../Hooks/slices/postSlice';
 
 const style = {
     position: 'absolute',

@@ -16,7 +16,32 @@ export const getLoggedUserDetails = createAsyncThunk("users/getLoggedUserDetails
     const response = await axios.get(`/api/users/${username}`)
     return response.data.user
 })
-
+export const setFollowUsersHandler = createAsyncThunk("users/setFollowUsersHandler", async (followUser) => {
+    const token = localStorage?.getItem("notico-token")
+    const followUserId = followUser._id
+    const followResponse = await axios.post(`/api/users/follow/${followUserId}`, {},
+        {
+            headers:
+            {
+                authorization: token
+            }
+        }
+    )
+    return followResponse.data
+})
+export const setUnFollowUsersHandler = createAsyncThunk("users/setUnFollowUsersHandler", async (UnfollowUser) => {
+    const token = localStorage?.getItem("notico-token")
+    const followUserId = UnfollowUser._id
+    const UnfollowResponse = await axios.post(`/api/users/unfollow/${followUserId}`, {},
+        {
+            headers:
+            {
+                authorization: token
+            }
+        }
+    )
+    return UnfollowResponse.data
+})
 const userSlice = createSlice({
     name: "getUsers",
     initialState,
@@ -52,6 +77,13 @@ const userSlice = createSlice({
         [getLoggedUserDetails.rejected]: (state, action) => {
             state.state = "failed"
         },
+        [setFollowUsersHandler.fulfilled]: (state, action) => {
+            state.users = action.payload.users
+        },
+        [setUnFollowUsersHandler.fulfilled]: (state, action) => {
+            state.users = action.payload.users
+        },
+
     }
 })
 export const userReducer = userSlice.reducer

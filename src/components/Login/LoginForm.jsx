@@ -30,6 +30,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LoginForm() {
+    // login state- state
     const { username, password, state } = useSelector((store) => store.loginReducer)
     const dispatch = useDispatch()
     const location = useLocation()
@@ -44,7 +45,7 @@ export default function LoginForm() {
         }, 5000)
         setTimeout(()=>{
             dispatch(loginActions.setStateIdleHandler())
-        },500)
+        },5000)
        
     }, [state, dispatch])
     return (

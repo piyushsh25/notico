@@ -168,7 +168,6 @@ export const editCommentHandler = createAsyncThunk("comment/editCommentHandler",
             }
         }
     )
-    console.log(editCommentResponse.data.posts)
     return editCommentResponse.data.posts
 })
 //bookmark controllers
