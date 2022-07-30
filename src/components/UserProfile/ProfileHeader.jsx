@@ -1,5 +1,4 @@
 import "./Profile.css"
-import Button from '@mui/material/Button';
 import { FollowIcon } from "../FollowIcon/FollowIcon";
 import { useSelector } from "react-redux";
 export const ProfileHeader = ({ userDetails, postFromUser, setShowFollowing }) => {
