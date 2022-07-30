@@ -7,11 +7,13 @@ const initialState = {
     error: ""
 }
 export const loginButtonHandler = createAsyncThunk("auth/loginButtonHandler", async ({ username, password }) => {
+    username = username.split(" ").join("")
+    console.log(username)
     const response = await axios.post("/api/auth/login", {
         username: username, password: password
     })
-    localStorage.setItem("notico-token",response.data.encodedToken)
-    localStorage.setItem("notico-details",JSON.stringify(response.data))
+    localStorage.setItem("notico-token", response.data.encodedToken)
+    localStorage.setItem("notico-details", JSON.stringify(response.data))
     return response.data
 })
 
@@ -25,8 +27,8 @@ const loginSlice = createSlice({
         setPasswordHandler: (state, action) => {
             state.password = action.payload
         },
-        setStateIdleHandler:(state,action)=>{
-            state.state="idle"
+        setStateIdleHandler: (state, action) => {
+            state.state = "idle"
         }
     },
     extraReducers: {
@@ -40,7 +42,7 @@ const loginSlice = createSlice({
         [loginButtonHandler.rejected]: (state, action) => {
             state.state = "rejected"
         },
-       
+
 
     }
 })

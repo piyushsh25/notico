@@ -9,6 +9,7 @@ const initialState = {
     error: ""
 }
 export const signupButtonHandler = createAsyncThunk("auth/signupButtonHandler", async ({ firstName, lastName, username, password }) => {
+    username = username.split(" ").join("")
     const response = await axios.post("/api/auth/signup", {
         firstName,
         lastName,

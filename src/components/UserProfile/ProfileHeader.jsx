@@ -16,7 +16,7 @@ export const ProfileHeader = ({ userDetails, postFromUser, setShowFollowing }) =
         <div className="header-container">
             <div className="profile-header-container">
                 <div className="profile-page-ing-username">
-                    <div><img src={userDetails.img} alt={userDetails.username} className="img-circle-user" /></div>
+                    <div><img src={userDetails?.img} alt={userDetails.username} className="img-circle-user" /></div>
                     <div className="username-profile-page">@{userDetails.username}</div>
                 </div>
                 <div className="col-md-9 p-t-2">
