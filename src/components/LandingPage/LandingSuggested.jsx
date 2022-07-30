@@ -31,14 +31,20 @@ export const LandingSuggested = ({ Drawer }) => {
     }, [state.users, dispatch])
 
     // search the usernname from the localstorage and check in the database
-    const localstorageUser = JSON.parse(localStorage?.getItem("notico-details")).foundUser?.username
-    const userDetailsFromDB = users.find((user) => {
-        return user.username === localstorageUser
-    })
+    const localstorageUser = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
+    if (localstorageUser) {
+        var userDetailsFromDB = users?.find((user) => {
+            return user.username === localstorageUser
+        })
+        var usersToDisplay = users?.filter((user) => {
+            return user.username !== userDetailsFromDB.username
+        })
+    }
+
+
     // seperated the user from suggested because it cannot follow its own account
-    const usersToDisplay = users.filter((user) => {
-        return user.username !== userDetailsFromDB.username
-    })
+
+
     // dispatch(getUsers())
     return <Drawer
         sx={{
@@ -68,7 +74,7 @@ export const LandingSuggested = ({ Drawer }) => {
                 failed to load suggestions. refresh the page
             </div>}
 
-            {usersToDisplay.slice(0, 5).map((user) => (
+            {(usersToDisplay?usersToDisplay:users).slice(0, 5).map((user) => (
                 <ListItem key={user._id} disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -82,7 +88,7 @@ export const LandingSuggested = ({ Drawer }) => {
                                 {user.firstName.length > 10 ? <>@{user.firstName.substring(0, 10)}...</> : <>@{user.username}</>}
                             </Link>
                         </div>
-                    <FollowIcon userDetailsFromDB={userDetailsFromDB} user={user}/>
+                        <FollowIcon userDetailsFromDB={userDetailsFromDB} user={user} />
                     </ListItemButton>
 
                 </ListItem>

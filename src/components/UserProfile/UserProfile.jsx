@@ -35,13 +35,13 @@ export function UserProfile() {
     const { users } = useSelector((store) => store.userReducer)
     // finding the user details in the user state 
     const userDetails = users.find((user) => {
-        return user.username === userName
+        return user?.username === userName
     })
     // extracting the posts from post Reducer
     const { posts } = useSelector((store) => store.postReducer)
     // check the post details if it belongs to the user
-    const postFromUser = posts.filter((post) => {
-        return post.username === userName
+    const postFromUser = posts?.filter((post) => {
+        return post?.username === userName
     })
     // state for follow unfollow page
     const [showFollowing,setShowFollowing]=React.useState(false)
