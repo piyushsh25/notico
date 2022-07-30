@@ -40,7 +40,7 @@ function a11yProps(index) {
     };
 }
 
-export function FollowingPage({ userDetails,setShowFollowing }) {
+export function FollowingPage({ userDetails, setShowFollowing }) {
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -52,13 +52,13 @@ export function FollowingPage({ userDetails,setShowFollowing }) {
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="actions-tabs">
-                    <Tab label={`Folowers`} {...a11yProps(0)} />
-                    <Tab label={`Following`}  {...a11yProps(1)} />
-                    <CloseIcon className="following-page-crossbar" onClick={()=>setShowFollowing(false)}/>
+                    <Tab label={`Folowers (${userDetails.followers.length})`} {...a11yProps(0)} />
+                    <Tab label={`Following (${userDetails.followers.length})`}  {...a11yProps(1)} />
+                    <CloseIcon className="following-page-crossbar" onClick={() => setShowFollowing(false)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-            {userDetails.followers.length===0 && <div className="notico-liked-display"> No followers yet :( </div>}
+                {userDetails.followers.length === 0 && <div className="notico-liked-display"> No followers yet :( </div>}
                 {userDetails.followers.map((user) => {
                     return <>
                         <div className="notico-liked-display">
@@ -78,7 +78,7 @@ export function FollowingPage({ userDetails,setShowFollowing }) {
                 })}
             </TabPanel>
             <TabPanel value={value} index={1}>
-            {userDetails.following.length===0 && <div className="notico-liked-display"> No following yet :( </div>}
+                {userDetails.following.length === 0 && <div className="notico-liked-display"> No following yet :( </div>}
                 {userDetails.following.map((user) => {
                     return <div className="notico-liked-display">
                         <div className="notico-post-icon">
