@@ -14,6 +14,24 @@
 .post-body-unique-page {
   margin-top: 2rem;
 }
-.username-profile-page{
-    margin-left: 1rem;
+.username-profile-page {
+  margin-left: 1rem;
+}
+/* following modal */
+.comment-page.following-page {
+  border: 2px solid black;
+  background-color: white;
+  width: 50vw;
+  height: 50vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.following-page-crossbar{
+  margin-top: 12px;
+  position: absolute;
+  right: 10%;
+  cursor: pointer;
+}
+.followers-following-text-header-page{
+  cursor: pointer;
 }

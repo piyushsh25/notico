@@ -6,27 +6,18 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Button from '@mui/material/Button';
 import { NoticoFooter } from '../Footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, setFollowUsersHandler, setUnFollowUsersHandler, userAction } from '../../Hooks/slices/usersSlice';
+import { getUsers, userAction } from '../../Hooks/slices/usersSlice';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
+import { FollowIcon } from '../FollowIcon/FollowIcon';
 
 export const LandingSuggested = ({ Drawer }) => {
     const drawerWidth = 240;
     const dispatch = useDispatch()
-    // to check if the user is following an account
-    let isFollowing;
     const { users, state } = useSelector((store) => store.userReducer)
-    function followUserTrigger(user) {
-        dispatch(setFollowUsersHandler(user))
-    }
-    function UnfollowUserTrigger(user) {
-        dispatch(setUnFollowUsersHandler(user))
-    }
-
     React.useEffect(() => {
         if (state === "idle") {
             dispatch(getUsers())
@@ -91,12 +82,7 @@ export const LandingSuggested = ({ Drawer }) => {
                                 {user.firstName.length > 10 ? <>@{user.firstName.substring(0, 10)}...</> : <>@{user.username}</>}
                             </Link>
                         </div>
-                        {isFollowing = userDetailsFromDB.following.some((userFollowing) => {
-                            return user.username === userFollowing.username
-                        })}
-
-                        {isFollowing ? <Button color= "primary" className="follow-button-landing-page" onClick={() => UnfollowUserTrigger(user)}>Unfollow</Button> :
-                            <Button variant="contained" className="follow-button-landing-page" onClick={() => followUserTrigger(user)}>Follow</Button>}
+                    <FollowIcon userDetailsFromDB={userDetailsFromDB} user={user}/>
                     </ListItemButton>
 
                 </ListItem>

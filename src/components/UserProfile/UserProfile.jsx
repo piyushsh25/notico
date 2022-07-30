@@ -13,6 +13,7 @@ import { ProfileHeader } from './ProfileHeader';
 import { useSelector } from 'react-redux';
 import { UserPosts } from './UserPosts';
 import { Divider } from '@mui/material';
+import {FollowingPage} from './followingPage';
 export function UserProfile() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -42,6 +43,8 @@ export function UserProfile() {
     const postFromUser = posts.filter((post) => {
         return post.username === userName
     })
+    // state for follow unfollow page
+    const [showFollowing,setShowFollowing]=React.useState(false)
     return (
         <Box sx={{ display: 'flex' }} onClick={() => showActionHandler(false)}>
             <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
@@ -50,11 +53,13 @@ export function UserProfile() {
                 <DrawerHeader />
                 {/* the posts {noticos} */}
                 <Typography paragraph>
-                    <ProfileHeader userDetails={userDetails} postFromUser={postFromUser} />
+                    <ProfileHeader userDetails={userDetails} postFromUser={postFromUser} setShowFollowing={setShowFollowing}/>
                     <UserPosts postFromUser={postFromUser}/>
+                    {showFollowing && <FollowingPage userDetails={userDetails} setShowFollowing={setShowFollowing}/>}
                 </Typography>
             </Box>
             <LandingSuggested Drawer={Drawer} />
+ 
         </Box>
     );
 }
