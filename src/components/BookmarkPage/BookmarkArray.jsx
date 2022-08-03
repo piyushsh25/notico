@@ -5,10 +5,16 @@ import Box from '@mui/material/Box';
 import { PostsCTA } from "../NoticoPosts/PostsCTA";
 import CommentPage from "../Comment/CommentPage";
 import { Link } from "react-router-dom";
+import { Time } from "../NoticoPosts/Time";
+import dayjs from "dayjs";
 export const BookmarkArray = () => {
     const { postBookmarkState, bookmarks } = useSelector((store) => store.postReducer)
     const { showCommentPage } = useSelector((store) => store.postReducer)
-
+    // copy bookmark array for sort
+    const bookmarkArray=[...bookmarks]
+    bookmarkArray.sort((a, b) => {
+        return dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1
+    })
     return <div className="posts-container post-body-landing-page">
         <div className="home-page-posts-header">
             Bookmarks
@@ -21,7 +27,7 @@ export const BookmarkArray = () => {
         }
         {bookmarks.length === 0 && <div>No noticos' bookmarked..</div>}
         {
-            bookmarks?.map((bookmark) => {
+            bookmarkArray?.map((bookmark) => {
                 return <div className="notico-container" key={bookmark._id}>
                     <div className="notico-post">
                         <Link to={`/user/${bookmark.username}`}>
@@ -38,6 +44,7 @@ export const BookmarkArray = () => {
                                     <div className="notico-post-user-username">
                                         @{bookmark.username}
                                     </div>
+                                    <Time post={bookmark}/>
                                 </div>
                             </Link>
                             <Link to={`/post/${bookmark._id}`} className="cta-drawers-link">
