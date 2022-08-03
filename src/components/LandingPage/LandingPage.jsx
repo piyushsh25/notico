@@ -23,18 +23,18 @@ export default function HomePage() {
   };
   //create post cta
   const [showAction, setShowAction] = React.useState(false)
-    function showActionHandler(value) {
-        setShowAction(value)
-    }
-  
+  function showActionHandler(value) {
+    setShowAction(value)
+  }
+
   return (
-    <Box sx={{ display: 'flex' }} onClick={()=>showActionHandler(false)}>
+    <Box sx={{ display: 'flex' }} onClick={() => showActionHandler(false)}>
       <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />
       <LandingCTA theme={theme} Drawer={Drawer} DrawerHeader={DrawerHeader} handleDrawerClose={handleDrawerClose} open={open} LandingPageActions={LandingPageActions} />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="post-body-landing-page">
         <DrawerHeader />
         {/* create new posts */}
-        <Textarea showAction={showAction} setShowAction={setShowAction} showActionHandler={showActionHandler} onClick={()=>showActionHandler(true)}/>
+        <Textarea showAction={showAction} setShowAction={setShowAction} showActionHandler={showActionHandler} onClick={() => showActionHandler(true)} />
         {/* the posts {noticos} */}
         <Typography paragraph>
           <Post />

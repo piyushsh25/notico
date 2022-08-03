@@ -19,17 +19,14 @@ export const FollowIcon = ({ userDetailsFromDB, user }) => {
     if (localstorageUser) {
         checkIfUserProfile = userDetailsFromDB === user
     }
-    function checkIsFollowing() {
-        isFollowing = userDetailsFromDB?.following?.some((userFollowing) => {
-            return user?.username === userFollowing?.username
-        })
-    }
     // to check if the user is following an account
 
+
+
     return <>
-        {
-            localstorageUser && checkIsFollowing()
-        }
+        {isFollowing=userDetailsFromDB?.following?.some((userFollowing) => {
+            return user?.username === userFollowing?.username
+        })}
         {
             checkIfUserProfile ?
                 <Button variant="contained">Edit Profile</Button>
