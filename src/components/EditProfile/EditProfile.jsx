@@ -27,22 +27,22 @@ export const EditProfile = () => {
         <form id="contact">
             <h3>Editing profile....</h3>
             <h4>Please provide a proper link for the image. The image may not load if the link is broken.</h4>
-            <fieldset>
+            <fieldset className="contact-fieldset">
                 <input placeholder="first name" type="text" tabIndex="1" value={fName} onChange={(e) => setFName(e.target.value)} required autoFocus />
             </fieldset>
-            <fieldset>
+            <fieldset className="contact-fieldset">
                 <input placeholder="lasd name" type="text" tabIndex="2" value={lName} onChange={(e) => setLName(e.target.value)} required autoFocus />
             </fieldset>
-            <fieldset>
-                <input placeholder="bio" type="text" tabIndex="1" value={bioData} onChange={(e) => setBioData(e.target.value)} required autoFocus />
+            <fieldset className="contact-fieldset">
+                <input placeholder="bio" type="text" tabIndex="3" value={bioData} onChange={(e) => setBioData(e.target.value)} required autoFocus />
             </fieldset>
-            <fieldset>
+            <fieldset className="contact-fieldset">
                 <input placeholder="image link starts with http://" type="url" value={img} onChange={(e) => setImg(e.target.value)} tabIndex="4" required />
             </fieldset>
-            <fieldset>
+            <fieldset className="contact-fieldset">
                 <input placeholder="portfolio link starts with http://" type="url" value={portfolioLink} onChange={(e) => setPortfolioLink(e.target.value)} tabIndex="4" required />
             </fieldset>
-            <fieldset>
+            <fieldset className="contact-fieldset">
                 <button id="profile-submit" onClick={(e) => editProfileTrigger(e, fName, lName, bioData, img, portfolioLink)}>Submit</button>
             </fieldset>
         </form>
