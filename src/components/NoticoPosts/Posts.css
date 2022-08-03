@@ -59,3 +59,8 @@
   color: inherit;
   text-decoration: none;
 }
+.notico-post-time{
+  position: absolute;
+  right: 0;
+  margin-right: 5rem;
+}
