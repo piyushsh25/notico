@@ -12,8 +12,6 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { requiresAuth } from '../../backend/utils/authUtils';
 export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions }) => {
     React.useEffect(() => {
         localStorage?.getItem("notico-token")
@@ -21,11 +19,12 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
 
     const token = localStorage?.getItem("notico-token")
     const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
+    const usernameLink = username ? `user/${username}` : "login"
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
                 <ListItem key={'Home'} disablePadding sx={{ display: 'block' }}>
-                    <Link to={username ? `/user/${username}` : "/"} className="cta-drawers-link">
+                    <Link to={username ? `/user/${username}` : "/login"} className="cta-drawers-link">
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -43,7 +42,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
                                 <InboxIcon />
 
                             </ListItemIcon>
-                            <ListItemText primary={username? username: "My Profile"} sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary={username ? username : "My Profile"} sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </Link>
                 </ListItem>
@@ -52,9 +51,9 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
         </DrawerHeader>
         <Divider />
         <List>
-            {LandingPageActions.map((text, index) => (
+            {LandingPageActions.map((text) => (
                 <ListItem key={text.action} disablePadding sx={{ display: 'block' }}>
-                    <Link to={`${text.link}`} className="cta-drawers-link" onClick={text.onClick}>
+                    <Link to={`${text.action === "profile" ? `/${usernameLink}` : `/${text.link}`}`} className="cta-drawers-link" onClick={text.onClick}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
