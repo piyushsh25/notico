@@ -16,10 +16,9 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
     React.useEffect(() => {
         localStorage?.getItem("notico-token")
     })
-
     const token = localStorage?.getItem("notico-token")
     const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
-    const usernameLink = username ? `user/${username}` : "login"
+    const usernameLink = username ? `user/${username}` : "/login"
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
@@ -53,7 +52,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
         <List>
             {LandingPageActions.map((text) => (
                 <ListItem key={text.action} disablePadding sx={{ display: 'block' }}>
-                    <Link to={`${text.action === "profile" ? `/${usernameLink}` : `/${text.link}`}`} className="cta-drawers-link" onClick={text.onClick}>
+                    <Link to={`${text.action === "profile" ? `/${usernameLink}` : `${text.link}`}`} className="cta-drawers-link" onClick={text.onClick}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
