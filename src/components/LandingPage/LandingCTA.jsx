@@ -12,7 +12,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { Link } from "react-router-dom"
-export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions }) => {
+export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions, createPostIconHandler }) => {
     React.useEffect(() => {
         localStorage?.getItem("notico-token")
     })
@@ -77,29 +77,6 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
         </List>
         <Divider />
         <List>
-
-            {[{ action: 'Create new Post', icon: <AddCircleIcon /> }].map((text, index) => (
-                <ListItem key={text.action} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}
-                    >
-                        <ListItemIcon
-                            sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            {text.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={text.action} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
-                </ListItem>
-            ))}
 
             {token && <ListItem key={"logout"} disablePadding sx={{ display: 'block' }}>
                 <Link to="/logout" className="cta-drawers-link">
