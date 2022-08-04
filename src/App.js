@@ -14,6 +14,7 @@ import SinglePageComponent from "./components/Single-Post/SinglePage";
 import MockmanEs from "mockman-js";
 import { UserProfile } from "./components/UserProfile/UserProfile";
 import { ProfileEdit } from "./Pages/ProfileEdit";
+import { ErrorComp } from "./components/Error/ErrorComp";
 function App() {
   const { showEditModal } = useSelector((store) => store.postReducer)
   return (
@@ -22,18 +23,21 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/post/:postId" element={<SinglePageComponent/>} />
+          <Route path="/mock" element={<MockmanEs/>}/>
+          <Route path="user/:username" element={<UserProfile/>}/>
+          <Route path="*" element={<ErrorComp/>}/>
+          {/* requires auth routes */}
           <Route element={<RequiresAuth />}>
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/bookmark" element={<Bookmark />} />
             <Route path="/editprofile" element={<ProfileEdit/>}/>
           </Route>
+          {/* redirect when already loggedin route */}
           <Route element={<RedirectAuth />}>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Route>
-          <Route path="/mock" element={<MockmanEs/>}/>
-          <Route path="user/:username" element={<UserProfile/>}/>
         </Routes>
       </BrowserRouter>
       {showEditModal && <EditPostModal />}
