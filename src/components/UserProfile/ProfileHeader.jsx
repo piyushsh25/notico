@@ -11,13 +11,13 @@ export const ProfileHeader = ({ userDetails, postFromUser, setShowFollowing }) =
             return user?.username === localstorageUser
         })
     }
-
     return <>
         <div className="header-container">
             <div className="profile-header-container">
                 <div className="profile-page-ing-username">
                     <div><img src={userDetails?.img} alt={userDetails.username} className="img-circle-user" /></div>
                     <div className="username-profile-page">@{userDetails.username}</div>
+                    
                 </div>
                 <div className="col-md-9 p-t-2">
 
@@ -27,11 +27,15 @@ export const ProfileHeader = ({ userDetails, postFromUser, setShowFollowing }) =
                         <strong>{userDetails?.followers?.length}</strong> followers
                         <strong>{"     " + userDetails.following.length}</strong> following
                     </div> 
+
                     {/* here userdetails is the details of the post */}
                     <FollowIcon userDetailsFromDB={userDetailsFromDB} user={userDetails} />
+                    
+
                 </div>
             </div>
-
+            {userDetails.userBio?.bio && <div>{userDetails?.userBio?.bio }</div>}
+            {userDetails.userBio?.portfolio && <div>{userDetails?.userBio?.portfolio }</div>}
         </div>
     </>
 }

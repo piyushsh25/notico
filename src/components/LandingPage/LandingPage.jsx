@@ -26,7 +26,6 @@ export default function HomePage() {
   function showActionHandler(value) {
     setShowAction(value)
   }
-
   return (
     <Box sx={{ display: 'flex' }} onClick={() => showActionHandler(false)}>
       <Header AppBar={AppBar} open={open} handleDrawerOpen={handleDrawerOpen} />

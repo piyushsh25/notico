@@ -7,6 +7,7 @@ const initialState = {
     error: null,
     loggedUserState: "idle",
     loggedUserDetails: null,
+    editProfileState: "idle"
 }
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
     const response = await axios.get("/api/users")
@@ -41,6 +42,20 @@ export const setUnFollowUsersHandler = createAsyncThunk("users/setUnFollowUsersH
         }
     )
     return UnfollowResponse.data
+})
+export const editProfileHandler = createAsyncThunk("user/editProfileHandler", async ({ firstName, lastName, bioData, img, portfolioLink }) => {
+    const token = localStorage?.getItem("notico-token")
+    const userBio = { bio: bioData, portfolio: portfolioLink }
+    const userData = { firstName, lastName, img, userBio }
+    const editProfileResponse = await axios.post("/api/users/edit",
+        { userData },
+        {
+            headers: {
+                authorization: token
+            }
+        }
+    )
+    console.log(editProfileResponse)
 })
 const userSlice = createSlice({
     name: "getUsers",
@@ -82,6 +97,16 @@ const userSlice = createSlice({
         },
         [setUnFollowUsersHandler.fulfilled]: (state, action) => {
             state.users = action.payload.users
+        },
+        [editProfileHandler.pending]: (state, action) => {
+            state.editProfileState = "loading"
+        },
+        [editProfileHandler.fulfilled]: (state, action) => {
+            state.editProfileState = "fulfilled"
+            console.log('done')
+        },
+        [editProfileHandler.rejected]: (state, action) => {
+            state.editProfileState = "failed"
         },
 
     }

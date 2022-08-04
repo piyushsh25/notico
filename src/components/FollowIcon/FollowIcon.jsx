@@ -20,7 +20,9 @@ export const FollowIcon = ({ userDetailsFromDB, user }) => {
         checkIfUserProfile = userDetailsFromDB === user
     }
     // to check if the user is following an account
-
+    function editProfileHandler(user){
+       navigate("/editprofile",{state:user},{replace:true})
+    }
 
 
     return <>
@@ -29,7 +31,7 @@ export const FollowIcon = ({ userDetailsFromDB, user }) => {
         })}
         {
             checkIfUserProfile ?
-                <Button variant="contained">Edit Profile</Button>
+                <Button variant="contained" onClick={()=>editProfileHandler(user)}>Edit Profile</Button>
                 :
                 isFollowing ? <Button variant="contained" onClick={() => UnfollowUserTrigger(user)}>Following</Button> :
                     <Button variant="outlined" onClick={() => followUserTrigger(user)}>Follow</Button>

@@ -13,9 +13,9 @@ import EditPostModal from "./components/Modal/EditModal";
 import SinglePageComponent from "./components/Single-Post/SinglePage";
 import MockmanEs from "mockman-js";
 import { UserProfile } from "./components/UserProfile/UserProfile";
+import { ProfileEdit } from "./Pages/ProfileEdit";
 function App() {
   const { showEditModal } = useSelector((store) => store.postReducer)
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -26,6 +26,7 @@ function App() {
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/bookmark" element={<Bookmark />} />
+            <Route path="/editprofile" element={<ProfileEdit/>}/>
           </Route>
           <Route element={<RedirectAuth />}>
             <Route path="/login" element={<Login />} />
