@@ -13,7 +13,7 @@ import { red } from '@mui/material/colors';
 import { blue } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 
-export const PostsCTA = ({ post }) => {
+export const PostsCTA = ({ post, redirect }) => {
     const { bookmarks, showEditModal, posts } = useSelector((store) => store.postReducer)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -22,6 +22,7 @@ export const PostsCTA = ({ post }) => {
     useEffect(() => {
         dispatch(getBookmarksHandler())
     }, [dispatch, posts])
+
     const localStorageUserName = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
     //check if the user has liked the comment already
     const isLiked = post.likes.likedBy.some(user => user.username === localStorageUserName)
@@ -34,16 +35,21 @@ export const PostsCTA = ({ post }) => {
     //check if the post is in the bookmarks
     let isInBookmarks;
     async function deleteIconTrigger(post) {
+        // // passed navigate (redirect) from singe page commentCTA: will redirect to "/" if any post is deleted from singlepost page. 
+        // whereas redirect is undefined for other pages
+        redirect && redirect("/")
         //delete the post
         await dispatch(deletePostHandler(post))
         //check if the post exists in the bookmark
         const isInBookmark = bookmarks.some((bookmark) => {
             return bookmark._id === post._id
         })
+
         //if exists, delete it as well
         if (isInBookmark) {
             await dispatch(deleteBookmarksHandler(post))
         }
+
 
     }
     const navigate = useNavigate()

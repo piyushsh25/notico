@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { PostsCTA } from "../NoticoPosts/PostsCTA"
 import { getPosts } from "../../Hooks/slices/postSlice";
 import { EditCommentModal } from "../Modal/CommentEditModal"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 export const SinglePostContent = (postToRender) => {
     const dispatch = useDispatch()
+    const navigate=useNavigate()
     useEffect(() => {
         dispatch(getPosts())
     }, [])
@@ -33,7 +34,7 @@ export const SinglePostContent = (postToRender) => {
                 <div className="notico-post-content">
                     {postToRender.content}
                 </div>
-                <PostsCTA post={postToRender} />
+                <PostsCTA post={postToRender} redirect={navigate}/>
             </div>
 
         </div>

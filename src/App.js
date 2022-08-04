@@ -16,7 +16,6 @@ import { UserProfile } from "./components/UserProfile/UserProfile";
 import { ProfileEdit } from "./Pages/ProfileEdit";
 function App() {
   const { showEditModal } = useSelector((store) => store.postReducer)
-
   return (
     <div className="App">
       <BrowserRouter>
