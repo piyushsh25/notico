@@ -26,7 +26,7 @@ function App() {
           <Route path="/mock" element={<MockmanEs/>}/>
           <Route path="user/:username" element={<UserProfile/>}/>
           <Route path="*" element={<ErrorComp/>}/>
-          {/* requires auth routes */}
+          {/* requires auth routs */}
           <Route element={<RequiresAuth />}>
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/logout" element={<Logout />} />
