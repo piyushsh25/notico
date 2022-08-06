@@ -9,7 +9,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { Link } from "react-router-dom"
 export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, open, LandingPageActions, createPostIconHandler }) => {
@@ -18,7 +17,7 @@ export const LandingCTA = ({ theme, Drawer, DrawerHeader, handleDrawerClose, ope
     })
     const token = localStorage?.getItem("notico-token")
     const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
-    const usernameLink = username ? `user/${username}` : "/login"
+    const usernameLink = username ? `user/${username}` : "login"
     return <Drawer variant="permanent" open={open}>
         <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
