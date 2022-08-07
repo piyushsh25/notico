@@ -4,15 +4,22 @@ import { red } from '@mui/material/colors';
 import { useDispatch } from 'react-redux';
 import { deleteCommentHandler, dislikeCommentHandler, getIndividualPost, getPosts, likeCommentHandler, postAction } from '../../Hooks/slices/postSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 export const CommentCTA = ({ post, comment }) => {
     const dispatch = useDispatch()
     const username = JSON.parse(localStorage?.getItem("notico-details"))?.foundUser?.username
+    const token = localStorage.getItem("notico-token")
     let hasLikedComment;
     let hasCommented;
+    const navigate=useNavigate()
     async function likeCommentTrigger(post, comment) {
-        await dispatch(likeCommentHandler({ post, comment }))
-        await dispatch(getIndividualPost(post))
-        await dispatch(getPosts())
+        if (token) {
+            await dispatch(likeCommentHandler({ post, comment }))
+            await dispatch(getIndividualPost(post))
+            await dispatch(getPosts())
+        }else{
+            navigate("/login")
+        }
     }
     async function dislikeCommentTrigger(post, comment) {
         await dispatch(dislikeCommentHandler({ post, comment }))
