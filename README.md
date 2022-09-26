@@ -1,6 +1,6 @@
 # Notico
 
-Notico is a social media app. A user can login/logout and signup to a profile. Create, like, comment, edit, delete a post. Like/Edit a comment.Bookmark posts. The user can follow/ unfollow other users. A user can edit their profile. etc.. 
+Notico is a social media app with mock backend. A user can login/logout and signup to a profile. Create, like, comment, edit, delete a post. Like/Edit a comment.Bookmark posts. The user can follow/ unfollow other users. A user can edit their profile. etc.. 
 
 
 Tech Stack: Redux-Toolkit, ReactJS, Material UI.
