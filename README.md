@@ -52,6 +52,6 @@ This page
 
 ### Single Post page
 
-#[single post](./screenshots/Screenshot%202022-09-26%20102540.png)
+![single post](./screenshots/Screenshot%202022-09-26%20102540.png)
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
