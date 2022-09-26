@@ -15,10 +15,11 @@ Tech Stack: Redux-Toolkit, ReactJS, Material UI.
 ## App Components
 * HomePage
 * Login/SIgnup Page
-* Single Post Page
+* Bookmark
 * Comment Page
 * User Profile
 * Edit Profile
+* Single Post page
 
 ### Home Page
 This page 
@@ -32,7 +33,7 @@ This page
 ![Singup](./screenshots/Screenshot%202022-09-26%20101236.png)
 
 
-### Single Post Page.
+### Bookmarks.
 
 ![Quiz Page](./screenshots/Screenshot%20(266).png)
 
@@ -49,6 +50,8 @@ This page
 
 ![Edit profile](./screenshots//Screenshot%202022-09-26%20101236.png)
 
+### Single Post page
 
+#[single post](./screenshots/Screenshot%202022-09-26%20102540.png)
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
